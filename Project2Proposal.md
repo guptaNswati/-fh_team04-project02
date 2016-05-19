@@ -62,7 +62,6 @@ The pieces will be able to be moved with the mouse, and will snap to the center 
 The game will detect when the win condition has been met by either player and display a game results message, stating which player won. 
 
 There will be an option for a single player to play against a computer opponent. Since the computer only needs to worry about moving one piece at a time, and doesn't need to decide which piece to move, it will either move the piece that wins the game, or move to a space that doesn't allow its opponent (the player) to win next turn. The computer will determine which of the available spaces is ideal. 
----
 
 ## 2.0	Team and Constraints
 
