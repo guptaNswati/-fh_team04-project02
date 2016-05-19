@@ -1,21 +1,6 @@
-###Instructions###
-
-*This is a guide document to help you write the project proposal.*
-
-*You have to remove this "Instructions" section and replace any text between brackets `[` and `]`.*
-
-*NOTE: For readability, individual items in a list are not surrounded by brackets (with the exception of the section titled  "Deliverables and Milestones"). Assume these need also be replaced
-Also, any other text is written as an example.*
-
-*Post questions in the* ***public discussion forum*** *for the current project.*
-
-*Note: As long as your proposal contains the key parts and descriptions you may format this document as you see fit. However, I highly recommend certain sections such as* "Objectives and Deliverables" *be described via a bulleted list.*
-
----
-
 ###Project 2 Proposal###
 
-####[Project Name]####
+####Kamisado####
 
 __Team Composition:__<br>
 [Name of Teammates]
@@ -70,21 +55,13 @@ Kamisado, Chess, Board, Game, Two-Player, Computer Opponent
 
 
 ###1.4.	Scope and Objectives [critical section]
-[What is the scope and goals of your group project?]
+Graphics will need to be created for the board and the pieces. Additionally, graphics will be created for the purposes of highlighting valid board spaces and highlighting which opponent's piece will move if a certain space is landed on.
 
-[The scope describes the specific software system that your team will be designing and delivering.]
+The pieces will be able to be moved with the mouse, and will snap to the center of each board space. This way, pieces will appear aligned and centered. Only the active piece will be able to move, and the game will display an overlay of highlighted game spaces, indicating the spaces that are legal for the active piece to move onto. If a player finishes a move and the opponent's active piece is blocked, leaving it with no valid moves, the player will get an additional turn, moving the piece with the color of the blocked piece's color. 
 
-[Reminder:
+The game will detect when the win condition has been met by either player and display a game results message, stating which player won. 
 
-*	The ideal project will be a software system that will challenge a team of 4 or 5 students to use a broad range of software engineering skills. This includes skills, such as, requirements analysis, software design and architecture,  implementation, testing, to project planning, scheduling, tracking and documentaiton.
-
-*	Each student will each work approximately 10 hours per week for 4 weeks<sup>[1](#footnote_1)</sup>.  As part of the team experience, you will be analyzing what the client would be asking from the developers, list the services and features  to be provided by the proposed system, estimate the efforts for each service or feature, identify the components that have priority and negotiate project services based on time (and budget constraints).<br>
- *<sup><a name="footnote_1">1</a></sup>Note: Rarely does a proposal come in over the top. Instead, more often a proposal is not sufficient in scope and hence not accepted (until modified).*
-
-*	 For every component, state whether you will be working on the implementation<sup>[2](#footnote_2)</sup> that  will support it, or whether you will use existing work. <br>
- *<sup><a name="footnote_2">2</a></sup>Note: The impelementation involves source code.*]
-
-
+There will be an option for a single player to play against a computer opponent. Since the computer only needs to worry about moving one piece at a time, and doesn't need to decide which piece to move, it will either move the piece that wins the game, or move to a space that doesn't allow its opponent (the player) to win next turn. The computer will determine which of the available spaces is ideal. 
 ---
 
 ## 2.0	Team and Constraints
