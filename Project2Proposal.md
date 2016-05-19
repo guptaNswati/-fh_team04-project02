@@ -48,29 +48,19 @@ Note: The page numbers are for example only. Change these as you see fit.*]
 ## 1.0	Project Overview
 ### 1.1 Abstract
 
-[How would you briefly describe the purpose of your project?]
-
-[Often readers lack sufficient time to read the entire project proposal. Therefore, a short synopsis is necessary to provide motivation and a high level introduction of the project. ]
-
-* [Give a brief introduction as to ***problem statement***, the ***scope*** and a high level description of the system to be ***delivered***.] 
-*	[Include ***background*** for the project. Motivate the project by describing:
-  * What is the value of the system over the status quo?
-  * How will the final product be used by the target customer?]
+The purpose of this project is to develop a Java implementation of the board game Kamisado. Kamisado is a two-player game that was released in 2008, and it takes about ten minutes to play. One player controls eight black pieces, and the other player controls eight white pieces. The board is an 8x8 area comprised of colored squares. Each of the players' eight pieces is marked with a different color corresponding to the colors on the board. Each piece can move forward or diagonally-forward as many spaces as possible without crossing through occupied spaces, but the player doesn't get to choose which piece he moves – the piece he must move is the piece whose color matches that of the space that his opponent landed on last turn. The first player to move one of his pieces to the opposite end of the board wins the game. 
 
 
 ### 1.2.	Target Customer [important part]
 
-[Who is the target audience?]
+The client for this project would be a PC game distribution service like Steam, EA Origin, or Uplay. The client would sell the game over their distribution service and take a percentage of the profits. 
 
-[List the intended user group(s):
-*	Who is  client (direct customer)? 
-*	Who is user (indrect customer)?]
-
-For example, for a patient management software the client may be the dental office and users may be Office Manager, Patient Coordinator, and Receptionist.
+The users of this software are the people who want to play Kamisado either with a friend or against a computer opponent. They would buy the game from the distributor and play it on their computers.
 
 
 ### 1.3.	Search Words 
-[Brief descriptors of your project that you think someone might use to search for your project. The descriptor may be three to five words or short phrases.]
+
+Kamisado, Chess, Board, Game, Two-Player, Computer Opponent
 
 
 ###1.4.	Scope and Objectives [critical section]
