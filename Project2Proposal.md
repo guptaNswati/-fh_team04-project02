@@ -50,6 +50,12 @@ Note: The page numbers are for example only. Change these as you see fit.*]
 
 The purpose of this project is to develop a Java implementation of the board game Kamisado. Kamisado is a two-player game that was released in 2008, and it takes about ten minutes to play. One player controls eight black pieces, and the other player controls eight white pieces. The board is an 8x8 area comprised of colored squares. Each of the players' eight pieces is marked with a different color corresponding to the colors on the board. Each piece can move forward or diagonally-forward as many spaces as possible without crossing through occupied spaces, but the player doesn't get to choose which piece he moves – the piece he must move is the piece whose color matches that of the space that his opponent landed on last turn. The first player to move one of his pieces to the opposite end of the board wins the game. 
 
+The software will be written in Java, using Swing for the GUI. Java2D may be used for graphics, but it may be easier to design the graphics in an external program like Photoshop or GIMP and use them in Swing.
+
+The game will be playable by two players locally on one machine. The user will start up the program, start a two player game, and play along with a friend. Each player will take turns using the mouse to move their pieces. The spaces available for them to move their piece to will be highlighted, and if the user hovers over an available space, the opponent's piece that will move on the next turn will be highlighted. The game will automatically end when the win condition for one player is met, and the game can be reset at any time.
+
+Additionally, the teams aims to include a computer player so that one player may still play the game. Due to the simple rules and the fact that only one piece is able to move each turn, a simple AI player should not be difficult to implement.
+
 
 ### 1.2.	Target Customer [important part]
 
