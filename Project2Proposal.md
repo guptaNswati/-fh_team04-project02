@@ -3,7 +3,8 @@
 ####Kamisado####
 
 __Team Composition:__<br>
-[Name of Teammates]
+
+Christopher Barbee,  Christopher , Matt
 
 May 19th, 2016
 
@@ -66,12 +67,9 @@ There will be an option for a single player to play against a computer opponent.
 ## 2.0	Team and Constraints
 
 ###2.1.	Team profile
-[What are the strengths for each team member?]
-
-[For each member of the team ***describe qualifications and strengths***<sup>[3](#footnote_3)</sup>.
-
-*<sup><a name="footnote_3">3</a></sup>Note: Every team member is expected to be involved in all project activities. This section only describes individual strengths, and NOT the team member’s sole responsibilites.*]
-
+Chris Dunleavy - proficient in Java, has some experience with JavaScript, HTML, CSS, and SQL
+Chris Barbee - Have some professional experience in Java ( Hibernate, soem RESTful web services, soem jsp, some UML ( Class Diagram and Sequence Diagrams ). Some javascript ( including JSON, and HTTPRequest ). I enjoy the design phase ( making UML diagrams for instance )
+Hanyu Chen - Good at using Java and taking CS1C now in Foothill College. Although technically I don't have much experience in Java, but I will try my best to learn and help my team.
 
 ### 2.1.	Challenges
 [What are the challenges you foresee in successfully completing your project?]
