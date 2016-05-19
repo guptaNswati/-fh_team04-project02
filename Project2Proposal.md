@@ -67,14 +67,15 @@ There will be an option for a single player to play against a computer opponent.
 ## 2.0	Team and Constraints
 
 ###2.1.	Team profile
-Chris Dunleavy - proficient in Java, has some experience with JavaScript, HTML, CSS, and SQL
-Chris Barbee - Have some professional experience in Java ( Hibernate, soem RESTful web services, soem jsp, some UML ( Class Diagram and Sequence Diagrams ). Some javascript ( including JSON, and HTTPRequest ). I enjoy the design phase ( making UML diagrams for instance )
-Hanyu Chen - Good at using Java and taking CS1C now in Foothill College. Although technically I don't have much experience in Java, but I will try my best to learn and help my team.
+* Chris Dunleavy - proficient in Java, has some experience with JavaScript, HTML, CSS, and SQL
+* Chris Barbee - Have some professional experience in Java ( Hibernate, soem RESTful web services, soem jsp, some UML ( Class Diagram and Sequence Diagrams ). Some javascript ( including JSON, and HTTPRequest ). I enjoy the design phase ( making UML diagrams for instance )
+* Hanyu Chen - Good at using Java and taking CS1C now in Foothill College. Although technically I don't have much experience in Java, but I will try my best to learn and help my team.
 
 ### 2.1.	Challenges
 [What are the challenges you foresee in successfully completing your project?]
 * Time constraints -- 4 weeks ,  4 sprints.
-* Getting up to speed with Java Swing and J2D
+* Getting up to speed with Java Swing and J2D(basically is making model of board and game pieces, also need to learn how to drag and drop pieces. 
+* Designing a computer component with AI
 
 [Provide a ***description of challenges*** that your group might face. These are often technical and non-technical aspects that may not be apparent to the reader.]
 
@@ -88,6 +89,7 @@ For example, if you were creating a software system for a dental office to manag
 * Non-Technical Constraints:
   * Users have a general understanding of how to user computers ( mouse / keyboard / GUI )
   * We only have 4 weeks to complet this proect
+  * Manpower is not as good as other groups.  
 * Techinical Constraints:
   *  Assuming the user(s) has a version on Java VM with Swing and Java2D libraries.
   *  Assuming the user(s) have a reasonably recent computer that can run a version of JRE ( with J2D and Swing set )
@@ -139,7 +141,7 @@ Deliverables include:
 | Proposal Presentation      | May 19, 2016  |
 | Building board model and simple view of an initialized board ( with pieces ) | May 26, 2016 |
 | Basic functionality to move a piece and logic to validate the users move  | June 2, 2016 |
-| Functionality to show users possible moves ( higlighting )  | June 9, 2016] |
+| Functionality to show users possible moves ( higlighting ), if possible, develope AI and look-ahead engine | June 9, 2016] |
 |  |  |
 | ...                        | [expected date] |
 | Demonstration and Delivery | June 16, 2016    |
