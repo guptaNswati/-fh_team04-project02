@@ -75,6 +75,8 @@ There will be an option for a single player to play against a computer opponent.
 
 ### 2.1.	Challenges
 [What are the challenges you foresee in successfully completing your project?]
+* Time constraints -- 4 weeks ,  4 sprints.
+* Getting up to speed with Java Swing and J2D
 
 [Provide a ***description of challenges*** that your group might face. These are often technical and non-technical aspects that may not be apparent to the reader.]
 
@@ -86,8 +88,8 @@ For example, if you were creating a software system for a dental office to manag
 [**List any specific assumptions on which the project is based on and imposed constraints** that your team will be working under. Non-technical constraints could be: such as schedule and budget. Technical constraints may be design or implementation metholodogies, tools, operating system(s), hardware or software constraints.
 
 * Non-Technical Constraints:
-  * Such as time limit
-  * add here...
+  * Users have a general understanding of how to user computers ( mouse / keyboard / GUI )
+  * We only have 4 weeks to complet this proect
 * Techinical Constraints:
   *  Assuming the user(s) has a version on Java VM with Swing and Java2D libraries.
   *  Assuming the user(s) have a reasonably recent computer that can run a version of JRE ( with J2D and Swing set )
@@ -106,6 +108,7 @@ Deliverables include:
 *	Software System Project Proposal.
 *	Preliminary design docs ( interfaces )
 *	Class Diagram and Sequence diagrams
+*	CRC Cards
 *	[user manual and installation instructions]
 *	Presenations
 *	javadoc
@@ -138,7 +141,7 @@ Deliverables include:
 | Proposal Presentation      | May 19, 2016  |
 | Building board model and simple view of an initialized board ( with pieces ) | May 26, 2016 |
 | Basic functionality to move a piece and logic to validate the users move  | June 2, 2016 |
-| Functionality to show users possible moves ( higlighting )  | [expected date] |
-|  | April 21, 2016  |
+| Functionality to show users possible moves ( higlighting )  | June 9, 2016] |
+|  |  |
 | ...                        | [expected date] |
 | Demonstration and Delivery | June 16, 2016    |
