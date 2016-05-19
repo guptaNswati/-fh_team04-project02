@@ -5,7 +5,7 @@
 __Team Composition:__<br>
 [Name of Teammates]
 
-[Date]
+May 19th, 2016
 
 ---
 
@@ -89,7 +89,8 @@ For example, if you were creating a software system for a dental office to manag
   * Such as time limit
   * add here...
 * Techinical Constraints:
-  * add here...]
+  *  Assuming the user(s) has a version on Java VM with Swing and Java2D libraries.
+  *  Assuming the user(s) have a reasonably recent computer that can run a version of JRE ( with J2D and Swing set )
 
 ---
 
@@ -103,11 +104,12 @@ For example, if you were creating a software system for a dental office to manag
 
 Deliverables include:
 *	Software System Project Proposal.
-*	[design document]
+*	Preliminary design docs ( interfaces )
+*	Class Diagram and Sequence diagrams
 *	[user manual and installation instructions]
-*	[presentations]
-*	[any other documents]
-*	[implementation code]
+*	Presenations
+*	javadoc
+*	java code
 *	[This list may include product deployment activities that are necessary for the successful use of the system your team develops.]
 
  *<sup><a name="footnote_4">4</a></sup>Note: This list may be modified over the weeks until the final submission.* 
@@ -115,7 +117,15 @@ Deliverables include:
 
 
 ### 3.2.	Schedule and Budget Summary [critical section]
-[What are the projected milestones and specific delivarables?]
+
+* Schedule -- Project 2 has a limited number of sprints (4)
+* Main milestones are
+    --  Modeling the board and pieces ( initializing the board and pieces )
+    --  Valid movement of a players piece
+    --  Showing the set of a players moves
+    --  Checking for game winning move
+    --  Drag and Drop pieces ( ? )
+    --  AI / Look-ahead engine...
 
 [Fill in your teams projected milestones. You will be modifying this over the next few weeks.]
 
@@ -124,11 +134,11 @@ Deliverables include:
 
 | Item                       | Date            |
 | :--------------------------|:----------------|
-| Project Proposal           | April 13, 2016  |
-| Proposal Presentation      | April 14, 2016  |
-| [feature 1]                | [expected date] |
-| [feature 2]                | [expected date] |
+| Project Proposal           | May 19, 2016  |
+| Proposal Presentation      | May 19, 2016  |
+| Building board model and simple view of an initialized board ( with pieces ) | May 26, 2016 |
+| Basic functionality to move a piece and logic to validate the users move  | June 2, 2016 |
+| Functionality to show users possible moves ( higlighting )  | [expected date] |
+|  | April 21, 2016  |
 | ...                        | [expected date] |
-| Sprint 1                   | April 21, 2016  |
-| ...                        | [expected date] |
-| Demonstration and Delivery | May 12, 2016    |
+| Demonstration and Delivery | June 16, 2016    |
