@@ -1,6 +1,7 @@
 package kamisado.board;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class BoardImpl implements Board {
 	
@@ -10,6 +11,7 @@ public class BoardImpl implements Board {
 	
 	public BoardImpl() {
 		
+		// Initilize board colors...
 		boardColors = new Color[][] {
 		
 		    { Color.ORANGE, Color.BLUE, Color.PURPLE, Color.PINK,Color.YELLOW,Color.RED,Color.GREEN,Color.BROWN },
@@ -22,6 +24,7 @@ public class BoardImpl implements Board {
 			{ Color.BROWN,Color.GREEN,Color.RED,Color.YELLOW,Color.PINK,Color.PURPLE,Color.BLUE,Color.ORANGE }
 		};
 		
+		// Initialize Pieces on board.,.
 		boardPieces = new Piece[8][8];
 		pieceLocations = new Square[2][8];
 		
@@ -42,7 +45,13 @@ public class BoardImpl implements Board {
 		}
 		
 	}
-
+	
+	/**
+	 * get the color of the square referenced by x,y / Square
+	 * @param x   x index on board
+	 * @param y   y index on board
+	 * @return    the color of the square at x,y
+	 */
 	@Override
 	public Color getSquareColor(int x, int y) {
 		return boardColors[y][x];
@@ -53,6 +62,13 @@ public class BoardImpl implements Board {
 		return boardColors[s.getY()][s.getX()];
 	}
 	
+	/**
+	 * get the Piece at a particular square / x,y
+	 * @param x   x index on board
+	 * @param y   y index on board
+	 * @return    the Piece on the board square at x,y
+	 *            will return null if square is not occupied
+	 */
 	@Override
 	public Piece getPieceOnSquare(int x, int y) {
 		return boardPieces[y][x];
@@ -63,6 +79,20 @@ public class BoardImpl implements Board {
 		return boardPieces[s.getY()][s.getX()];
 	}
 	
+	/**
+	 * return the Square the specified Piece is on
+	 * @param p  -- specified Piece
+	 * @return -- the Square the specified Piece is on.
+	 */
+	public Square getSquarePieceIsOn( Piece p ) {
+		return pieceLocations[p.getPlayer().ordinal()][p.getColor().ordinal()];
+	}
+	
+	/**
+	 * set the board location ( square / x,y ) to a particular Piece
+	 * @param s
+	 * @param p
+	 */
 	private void setBoardPiece( Square s, Piece p) {
 		boardPieces[s.getY()][s.getX()] = p;
 	}
@@ -71,6 +101,12 @@ public class BoardImpl implements Board {
 		pieceLocations[p.getPlayer().ordinal()][p.getColor().ordinal()] = loc;
 	}
 	
+	/**
+	 *  
+	 * @param p  -- the piece to be moved
+	 * @param s  -- the square to move the piece to
+	 * @return   -- true if move is valid
+	 */
 	@Override
 	public boolean move(Piece p, Square s) {
 		Square start = pieceLocations[p.getPlayer().ordinal()][p.getColor().ordinal()];
@@ -81,23 +117,34 @@ public class BoardImpl implements Board {
 		
 		return false;
 	}
-
+	/**
+	 * 
+	 * @param p  -- the piece to move
+	 * @param s  -- the intended square to move to...
+	 * @return   -- true if move is valid
+	 */
 	@Override
-	public boolean isValudMove(Piece p, Square s) {
+	public boolean isValidMove(Piece p, Square s) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
+	/**
+	 * returns a list of allowable moves for the specified Piece
+	 * 
+	 */
 	@Override
 	public List<Square> getAllowableMoves(Piece p) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Square>();
 	}
+	
 	
 	/**
 	 * Simple text rendering of board
 	 */
 	public void render() {
+		
+		System.out.println();
 		
 		for ( int y=0; y<8; y++ ) {
 			for ( int x=0; x<8; x++ ) {
@@ -112,7 +159,8 @@ public class BoardImpl implements Board {
 				if (p!=null) {
 					Color pcolr = p.getColor();
 					String pcolrname=pcolr.name().substring(0, 2);
-					System.out.print("("+pcolrname+")");
+					if ( p.getPlayer()==Player.BLACK) System.out.print("["+pcolrname+"]");
+					else System.out.print("("+pcolrname+")");
 				}
 				else
 					System.out.print(" "+colr+" ");
