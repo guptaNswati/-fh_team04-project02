@@ -10,8 +10,7 @@ public class BoardImpl implements Board {
 	private Square[][] pieceLocations;
 	
 	public BoardImpl() {
-		
-		// Initilize board colors...
+
 		boardColors = new Color[][] {
 		
 		    { Color.ORANGE, Color.BLUE, Color.PURPLE, Color.PINK,Color.YELLOW,Color.RED,Color.GREEN,Color.BROWN },
@@ -168,5 +167,4 @@ public class BoardImpl implements Board {
 			System.out.println();
 		}
 	}
-
 }
