@@ -41,7 +41,7 @@ public interface Board {
 	 * @param s  -- the intended square to move to...
 	 * @return   -- true if move is valid
 	 */
-	public boolean isValudMove( Piece p,  Square s);
+	public boolean isValidMove( Piece p,  Square s);
 	
 	/**
 	 * returns a list of Allowable moves for the specified Piece

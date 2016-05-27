@@ -1,5 +1,6 @@
 package kamisado.board;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardImpl implements Board {
@@ -63,6 +64,10 @@ public class BoardImpl implements Board {
 		return boardPieces[s.getY()][s.getX()];
 	}
 	
+	public Square getSquarePieceIsOn( Piece p ) {
+		return pieceLocations[p.getPlayer().ordinal()][p.getColor().ordinal()];
+	}
+	
 	private void setBoardPiece( Square s, Piece p) {
 		boardPieces[s.getY()][s.getX()] = p;
 	}
@@ -83,15 +88,79 @@ public class BoardImpl implements Board {
 	}
 
 	@Override
-	public boolean isValudMove(Piece p, Square s) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean isValidMove(Piece p, Square s) {
+		List<Square> sqList = getAllowableMoves(p);
+		boolean isValid = false;
+		Square checkSquare;
+		for (int i = 0; i < sqList.size(); i++){
+			checkSquare = sqList.get(i);
+			if ((checkSquare.getX() == s.getX()) && (checkSquare.getY() == s.getY())){
+				isValid = true;
+				break;
+			}
+		}
+		return isValid;
 	}
 
 	@Override
 	public List<Square> getAllowableMoves(Piece p) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Square> sqList = new ArrayList<Square>();
+		boolean isValid = true;
+		Square pieceSquare = getSquarePieceIsOn(p);
+		Square checkSquare = pieceSquare;
+		if (p.getPlayer() == Player.BLACK){
+			while (isValid){
+				if (((checkSquare.getX()-1) >= 0) && ((checkSquare.getY()-1) >= 0)){
+					if (boardPieces[checkSquare.getX()-1][checkSquare.getY()+1] == null){
+						checkSquare = new Square((checkSquare.getX()-1), (checkSquare.getY()-1));
+						sqList.add(checkSquare);
+					}
+				}
+				//alternatively, use break
+				else{
+					isValid = false;
+				}
+			}
+			
+			isValid = true;
+			checkSquare = pieceSquare;
+			
+			while (isValid){
+				if (((checkSquare.getX()+1) <= 7) && ((checkSquare.getY()+1) <= 7)){
+					if (boardPieces[checkSquare.getX()+1][checkSquare.getY()+1] == null){
+						checkSquare = new Square((checkSquare.getX()+1), (checkSquare.getY()+1));
+						sqList.add(checkSquare);
+					}
+				}
+				else{
+					isValid = false;
+				}
+			}
+			
+			isValid = true;
+			checkSquare = pieceSquare;
+			
+			while (isValid){
+				if ((checkSquare.getY()+1) <= 7){
+					if (boardPieces[checkSquare.getX()][checkSquare.getY()+1] == null){
+						checkSquare = new Square((checkSquare.getX()), (checkSquare.getY()+1));
+						sqList.add(checkSquare);
+					}
+				}
+				else{
+					isValid = false;
+				}
+			}
+		}
+		return sqList;
+	}
+	
+	public boolean checkWinCondition(Piece p, Square s){
+		if (p.getPlayer() == Player.BLACK && s.getY() == 0)
+			return true;
+		else if (p.getPlayer() == Player.WHITE && s.getY() == 7)
+			return true;
+		else return false;
 	}
 	
 	/**
