@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <script src="/js/board.js"></script>
+      <script type="text/javascript">
+          
+         var ws;
+         
+         function openWebsocket()
+         {
+            if ("WebSocket" in window)
+            {
+                
+                alert("js open websocket...");
+               
+               ws = new WebSocket("ws://localhost:8080/KamisadoClient/actions");
+            
+               ws.onopen = function()
+               {
+                  message("websocket open..."); 
+               };
+				
+               ws.onmessage = function (evt) 
+               { 
+                  var received_msg = evt.data;
+                  message(received_msg);
+               };
+				
+               ws.onclose = function()
+               { 
+                  message("websocket closed"); 
+               };
+            }
+            
+            else
+            {
+               // The browser doesn't support WebSocket
+               alert("WebSocket NOT supported by your Browser!");
+            }
+         }
+         
+         function message(text) {
+             
+             content = document.getElementById("content");
+             content.innerHTML = content.innerHTML + text+"<br>";
+             
+         }
+         
+         function sendMessage() {
+             text = document.getElementById("msg").value;
+             ws.send( text );
+             message( text );
+             
+         }
+      </script>
+		
+   </head>
+   <body>
+       <button type="button" onclick="openWebsocket()">Open Websocket</button><br>
+       <input type="text" id="msg"><br>
+       Message: <button type="button" onclick="sendMessage();">Send Message</button>
+       <hr>
+       <div id="content"></div>
+      
+   </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- include js file that has KColor enum and boardColors[][] -->
+       <script language="javascript" src="js/board.js"></script>
+       <script language="javascript">
+           function f(rowNum) {
+               
+               row = document.getElementById("row"+rowNum);
+               
+               for ( x = 0; x < 8; x++ ) {
+                   
+                   canv = document.createElement("canvas");
+                   canv.setAttribute("height",80);
+                   canv.setAttribute("width",80);
+                   canv.setAttribute("id","square"+x+","+rowNum);
+                   
+                   color = boardColors[rowNum][x].colorcode;
+                   canv.style.background=color;
+                   
+                   row.appendChild(canv);
+                   
+               }
+           }
+           
+           function g() {
+               
+               board = document.getElementById("board");
+
+               for ( y=0; y < 8; y++ ) {
+                   
+                   row = document.createElement("div");
+                   row.setAttribute("id","row"+y);
+                   
+                   board.appendChild(row);
+                   
+                   f(y);
+                   
+               }
+           }
+    </script>
+    </head>
+    <body>
+        <button type="button" onclick="g();">ShowBoard</button>
+        <div id="board"></div>
+    </body>
+</html>
