@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -26,6 +27,7 @@ public class KamisadoBoard extends JPanel{
 
         int x = 0;
         int y = 0;
+        Random rand = new Random();
  
         for (int i = 0; i < boardWidth; i++) {
         	
@@ -66,7 +68,9 @@ public class KamisadoBoard extends JPanel{
         super.paintComponent(g);
 
         Square[][] allPieces = this.getBoard();
-        Random rand = new Random();
+        
+        List<Piece> blackPieces = pieces.getBlackPieces();
+        List<Piece> whitePieces  = pieces.getWhitePieces(); 
 
         for (int row = 0; row < allPieces.length; row++) {
             for (int column = 0; column < allPieces[row].length; column++) {
@@ -77,21 +81,26 @@ public class KamisadoBoard extends JPanel{
                         drawingRectangle.width, drawingRectangle.height);
             }
         }
-
-        List<Piece> drawPieces = pieces.getPieces();
-
-        for (Piece box : drawPieces) {
-            Point coordinate = box.getCoordinate();
-            Rectangle drawingRectangle = allPieces[coordinate.x][coordinate.y]
-                    .getDrawingRectangle();
-
-            int x = drawingRectangle.x + drawingRectangle.width / 2;
-            int y = drawingRectangle.y + drawingRectangle.height / 2;
-            int radius = this.getSquareWidth() * 2 / 6;
-
-            g.setColor(box.getColor());
-            g.fillOval(x - radius, y - radius, radius + radius, radius
-                    + radius);
+        
+        for(int i = 0; i < 8; i++ )
+        {
+        	Rectangle drawingRectangleForWhite = allPieces[0][i].getDrawingRectangle();
+        	int white_x = drawingRectangleForWhite.x + drawingRectangleForWhite.width / 2;
+            int white_y = drawingRectangleForWhite.y + drawingRectangleForWhite.height / 2;
+            int radiusForWhite = this.getSquareWidth() * 2 / 6;
+            
+            g.setColor(whitePieces.get(i).getColor());
+            g.fillOval(white_x - radiusForWhite, white_y - radiusForWhite, radiusForWhite + radiusForWhite, radiusForWhite
+                    + radiusForWhite);        	
+        	
+        	Rectangle drawingRectangleForBlack = allPieces[7][i].getDrawingRectangle();
+            int black_x = drawingRectangleForBlack.x + drawingRectangleForBlack.width / 2;
+             int black_y = drawingRectangleForBlack.y + drawingRectangleForBlack.height / 2;
+             int radiusForBlack = this.getSquareWidth() * 2 / 6;
+             
+             g.setColor(blackPieces.get(i).getColor());
+             g.fillOval(black_x - radiusForBlack, black_y - radiusForBlack, radiusForBlack + radiusForBlack, radiusForBlack
+                     + radiusForBlack);               
         }
     }
     
