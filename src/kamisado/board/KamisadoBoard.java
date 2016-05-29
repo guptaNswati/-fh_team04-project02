@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -101,6 +102,33 @@ public class KamisadoBoard extends JPanel{
              g.setColor(blackPieces.get(i).getColor());
              g.fillOval(black_x - radiusForBlack, black_y - radiusForBlack, radiusForBlack + radiusForBlack, radiusForBlack
                      + radiusForBlack);               
+        }
+        
+        // highlighting valid moves
+       List<Square> allowableMoves = new ArrayList<Square>();
+        
+        // vertical moves
+        allowableMoves.add(allPieces[1][0]);
+        allowableMoves.add(allPieces[2][0]);
+        allowableMoves.add(allPieces[3][0]);
+        allowableMoves.add(allPieces[4][0]);
+        allowableMoves.add(allPieces[5][0]);
+        allowableMoves.add(allPieces[6][0]);
+        
+        // diagonal moves
+        allowableMoves.add(allPieces[1][1]);
+        allowableMoves.add(allPieces[2][2]);
+        allowableMoves.add(allPieces[3][3]);
+        allowableMoves.add(allPieces[4][4]);
+        allowableMoves.add(allPieces[5][5]);
+        allowableMoves.add(allPieces[6][6]); 
+        
+        for(int j = 0; j < allowableMoves.size(); j++)
+        {
+        	Rectangle drawingRectangle = allowableMoves.get(j).getDrawingRectangle();
+            g.setColor(Color.WHITE);
+            g.drawRect(drawingRectangle.x + 2, drawingRectangle.y + 2 ,
+                    drawingRectangle.width - 5, drawingRectangle.height - 5);        	
         }
     }
     
