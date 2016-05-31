@@ -6,12 +6,26 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Work in progress -- Kamisado</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <!-- include js file that has KColor enum and boardColors[][] -->
-       <script language="javascript" src="js/board.js"></script>
-       <script language="javascript">
+        
+        <script type="text/javascript" src="js/enums.js"></script>
+        <script type="text/javascript" src="js/piece.js"></script>
+        <script type="text/javascript" src="js/square.js"></script>
+        <script type="text/javascript" src="js/board.js"></script>
+        
+        <script type="text/javascript">
+           
+           var KColors;
+           var Player;
+           
+           var previousPieceSelected=null;
+           
+           var board = new Board();
+              
            function f(rowNum) {
                
                row = document.getElementById("row"+rowNum);
@@ -23,8 +37,11 @@ and open the template in the editor.
                    canv.setAttribute("width",80);
                    canv.setAttribute("id","square"+x+","+rowNum);
                    
-                   color = boardColors[rowNum][x].colorcode;
-                   canv.style.background=color;
+                   //alert("in f() -- x:"+x+" y:"+y);
+                   kcolr = board.getSquareColorXY(x,y);
+                   
+                   colr = kcolr.colorcode;
+                   canv.style.background=colr;
                    
                    row.appendChild(canv);
                    
@@ -33,23 +50,181 @@ and open the template in the editor.
            
            function g() {
                
-               board = document.getElementById("board");
+               brd = document.getElementById("board");
 
                for ( y=0; y < 8; y++ ) {
                    
                    row = document.createElement("div");
                    row.setAttribute("id","row"+y);
+                   row.setAttribute("height",80);
                    
-                   board.appendChild(row);
+                   brd.appendChild(row);
                    
                    f(y);
                    
                }
            }
-    </script>
+           
+           // Show all the pieces on the board
+           function showPieces() {
+               
+               for ( var plyr in Player) {
+                   
+                   for ( var colr in KColors) {
+                       
+                       /*Piece*/ p = new Piece( Player[plyr], KColors[colr] );
+                       /*Square*/ sq = board.getSquarePieceIsOn(p);
+                       
+                       canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+                       this.renderPiece( canv, p );
+                       
+                   }
+               }
+               
+            }
+            
+            // render the piece on the board given its canvas
+            function renderPiece( canv, piece ) {
+                
+                ctx = canv.getContext("2d");
+                ctx.fillStyle=piece.getPlayer().colorcode;
+    
+                ctx.beginPath();
+                ctx.arc(40,40,35,0,2*Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle=piece.getPieceColor().colorcode;
+                ctx.beginPath();
+                ctx.arc(40,40,15,0,2*Math.PI);
+                ctx.fill();
+                
+           }
+           
+           // show avalble mvs for a particular piece ( set onclick to mv the piece )...
+           function showMvs( /*Piece*/ p, rendr ) {
+               
+               pstring = "new Piece(Player."+p.getPlayer().name+",KColors."+p.getPieceColor().name+")";
+               
+               allowables =board.getAllowableMoves(p);
+               
+               for ( idx=0; idx<allowables.length; idx++ ) {
+                   
+                   square = allowables[idx];
+                   canv = document.getElementById("square"+square.getX()+","+square.getY());
+                   sq="new Square("+square.getX()+","+square.getY()+")";
+                   
+                   if ( rendr ) {
+                       str = "movePieceTo("+pstring+","+sq+");";
+                       //alert( str );
+                       canv.setAttribute("onclick",str);
+                   }
+                   else {
+                       canv.setAttribute("onclick","");
+                   }
+                   
+                   this.renderChoice(p, rendr, canv);
+                  
+               }
+               
+               
+               
+           }
+           
+           //  render a piece ( as well as clear square ( for moving piece )
+           function renderChoice( piece, rendr, canv ) {
+                   
+                ctx = canv.getContext("2d");
+                
+                if ( rendr ) {
+                
+                    ctx.fillStyle=piece.getPlayer().colorcode;
+                    ctx.beginPath();
+                    ctx.arc(40,40,10,0,2*Math.PI);
+                    ctx.fill();
+                    
+                }
+                else {
+                    
+                    ctx.clearRect(0,0,80,80);      
+                    
+                }
+        
+    
+           }
+           // first move -->  set onclick for each piece to display alwabl mvs
+           function firstMove() {
+               
+               for ( var colr in KColors ) {
+                   
+                   /*Piece*/ p = new Piece( Player.WHITE, KColors[colr ] );
+                   /*Square*/ sq = board.getSquarePieceIsOn(p);
+                   
+                   pstring = "new Piece(Player.WHITE,KColors."+colr+")";
+                   
+                   canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+                   canv.setAttribute("onclick","showFirstMvs("+pstring+");");
+                   
+               }
+               
+           }
+           
+           // remove previous muvs and render new moves...
+           function showFirstMvs( /*Piece*/ p ) {
+               
+               if ( previousPieceSelected !== null ) {    
+                   this.showMvs( previousPieceSelected, false );   
+               }
+               this.showMvs( p, true );
+               
+               previousPieceSelected = p;
+               
+           }
+           // move piece p to square sq
+           function movePieceTo( /*Piece*/ p, /*Sqaure*/sq ) {
+               
+               this.showMvs( p, false );  // clear alwblmoves
+               
+               currSq = board.getSquarePieceIsOn(p);
+               
+               // clear current square
+               canv = document.getElementById("square"+currSq.getX()+","+currSq.getY());
+               ctx = canv.getContext("2d");
+               ctx.clearRect(0,0,80,80);  
+               
+               //update model
+               board.move( p, sq );
+               
+               //render new piece location...
+               canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+               this.renderPiece( canv, p );
+               
+               if ( previousPieceSelected !== null ) {
+                   
+                   for ( x=0; x<8; x++ ) {
+                       canv = document.getElementById("square"+x+",0");
+                       canv.setAttribute("onclick","");
+                    }
+               
+                }
+               
+               nxtPlyr = p.getPlayer()===Player.WHITE?Player.BLACK:Player.WHITE;
+               colr = board.getSquareColor(sq);
+               
+               /* Piece */ p = new Piece( nxtPlyr, colr );
+               
+               // show moves for next player and color ( will also set onclick mv for each mv )
+               this.showMvs( p, true );
+           }
+    
+          
+        </script>
     </head>
     <body>
         <button type="button" onclick="g();">ShowBoard</button>
+        <button type="button" onclick="showPieces();">RenderPieces</button>
+        <button type="button" onclick="showMvs( new Piece(Player.WHITE,KColors.PURPLE),true);">Moves</button>
+        <button type="button" onclick="firstMove();">FirstMove...</button>
+        
         <div id="board"></div>
     </body>
 </html>
