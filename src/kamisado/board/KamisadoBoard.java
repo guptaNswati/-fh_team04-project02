@@ -47,7 +47,6 @@ public class KamisadoBoard extends JPanel{
             for (int j = 0; j < boardWidth; j++) {
                 Square square = new Square();  
                 square.setColor(colors[i][j]);
-//                square.setColor(new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
                 square.setCoordinate(new Point(i, j));
                 square.setDrawingRectangle(new Rectangle(x, y, squareWidth,
                         squareWidth));
@@ -98,23 +97,32 @@ public class KamisadoBoard extends JPanel{
         
         for(int i = 0; i < 8; i++ )
         {
+        	// white pieces
         	Rectangle drawingRectangleForWhite = allPieces[0][i].getDrawingRectangle();
         	int white_x = drawingRectangleForWhite.x + drawingRectangleForWhite.width / 2;
             int white_y = drawingRectangleForWhite.y + drawingRectangleForWhite.height / 2;
-            int radiusForWhite = this.getSquareWidth() * 2 / 6;
-            
+            int radiusForWhite = this.getSquareWidth() * 2 / 4;
+            int radiusInnerCircle = radiusForWhite - 12;          
             g.setColor(whitePieces.get(i).getColor());
             g.fillOval(white_x - radiusForWhite, white_y - radiusForWhite, radiusForWhite + radiusForWhite, radiusForWhite
-                    + radiusForWhite);        	
+                    + radiusForWhite);              
+            g.setColor(colors[0][i]);           
+            g.fillOval(white_x - radiusInnerCircle, white_y - radiusInnerCircle, radiusInnerCircle + radiusInnerCircle, radiusInnerCircle
+                    + radiusInnerCircle);  
         	
+            // black pieces
         	Rectangle drawingRectangleForBlack = allPieces[7][i].getDrawingRectangle();
             int black_x = drawingRectangleForBlack.x + drawingRectangleForBlack.width / 2;
              int black_y = drawingRectangleForBlack.y + drawingRectangleForBlack.height / 2;
-             int radiusForBlack = this.getSquareWidth() * 2 / 6;
+             int radiusForBlack = this.getSquareWidth() * 2 / 4;
+             int radiusInnerBlkCircle = radiusForBlack - 12;
              
              g.setColor(blackPieces.get(i).getColor());
              g.fillOval(black_x - radiusForBlack, black_y - radiusForBlack, radiusForBlack + radiusForBlack, radiusForBlack
-                     + radiusForBlack);               
+                     + radiusForBlack);                
+             g.setColor(colors[7][i]);
+             g.fillOval(black_x - radiusInnerBlkCircle, black_y - radiusInnerBlkCircle, radiusInnerBlkCircle + radiusInnerBlkCircle, radiusInnerBlkCircle
+                     + radiusInnerBlkCircle);              
         }
         
         // highlighting valid moves
