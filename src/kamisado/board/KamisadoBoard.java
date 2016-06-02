@@ -155,17 +155,20 @@ public class KamisadoBoard extends JPanel{
     
 public static void main(String[] args) {
 		
-		JFrame frame = new JFrame();
-        
-        frame = new JFrame("Kamisado");
-        frame.setSize(500, 500);
-		
-		KamisadoBoard game = new KamisadoBoard();
-		frame.add(game);
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setVisible(true);
-	}
+	JFrame frame = new JFrame();
+    
+    frame = new JFrame("Kamisado");
+    frame.setSize(600, 600);
+    frame.setLocationRelativeTo(null);
+	
+	KamisadoBoard game = new KamisadoBoard();
+	frame.add(game);
+
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     frame.setVisible(true);
+     frame.setResizable(true);
+    }
+}
 
 
 
