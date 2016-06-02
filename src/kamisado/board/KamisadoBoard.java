@@ -17,6 +17,15 @@ public class KamisadoBoard extends JPanel{
 
     private Square[][] board;
     private Pieces pieces;
+    private static final Color[][] colors = {{ Color.ORANGE, Color.BLUE, Color.MAGENTA, Color.PINK,Color.YELLOW,Color.RED,Color.GREEN,Color.CYAN},
+    		{ Color.RED,Color.ORANGE,Color.PINK,Color.GREEN,Color.BLUE,Color.YELLOW,Color.CYAN,Color.MAGENTA },
+    		{ Color.GREEN,Color.PINK,Color.ORANGE,Color.RED,Color.MAGENTA,Color.CYAN,Color.YELLOW,Color.BLUE },
+    		{ Color.PINK,Color.MAGENTA,Color.BLUE,Color.ORANGE,Color.CYAN,Color.GREEN,Color.RED,Color.YELLOW },
+    		{ Color.YELLOW,Color.RED,Color.GREEN,Color.CYAN,Color.ORANGE,Color.BLUE,Color.MAGENTA,Color.PINK },
+    		{ Color.BLUE,Color.YELLOW,Color.CYAN,Color.MAGENTA,Color.RED,Color.ORANGE,Color.PINK,Color.GREEN },
+    		{ Color.MAGENTA,Color.CYAN,Color.YELLOW,Color.BLUE,Color.GREEN,Color.PINK,Color.ORANGE,Color.RED },
+    		{ Color.CYAN,Color.GREEN,Color.RED,Color.YELLOW,Color.PINK,Color.MAGENTA,Color.BLUE,Color.ORANGE }
+            };
 
     public KamisadoBoard() {
         this.board = initalizeBoard(BOARD_SIZE, SQUARES);
@@ -33,8 +42,9 @@ public class KamisadoBoard extends JPanel{
         for (int i = 0; i < boardWidth; i++) {
         	
             for (int j = 0; j < boardWidth; j++) {
-                Square square = new Square();   
-                square.setColor(new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
+                Square square = new Square();  
+                square.setColor(colors[i][j]);
+//                square.setColor(new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
                 square.setCoordinate(new Point(i, j));
                 square.setDrawingRectangle(new Rectangle(x, y, squareWidth,
                         squareWidth));
