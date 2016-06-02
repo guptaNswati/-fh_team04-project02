@@ -17,15 +17,18 @@ public class KamisadoBoard extends JPanel{
 
     private Square[][] board;
     private Pieces pieces;
-    private static final Color[][] colors = {{ Color.ORANGE, Color.BLUE, Color.MAGENTA, Color.PINK,Color.YELLOW,Color.RED,Color.GREEN,Color.CYAN},
-    		{ Color.RED,Color.ORANGE,Color.PINK,Color.GREEN,Color.BLUE,Color.YELLOW,Color.CYAN,Color.MAGENTA },
-    		{ Color.GREEN,Color.PINK,Color.ORANGE,Color.RED,Color.MAGENTA,Color.CYAN,Color.YELLOW,Color.BLUE },
-    		{ Color.PINK,Color.MAGENTA,Color.BLUE,Color.ORANGE,Color.CYAN,Color.GREEN,Color.RED,Color.YELLOW },
-    		{ Color.YELLOW,Color.RED,Color.GREEN,Color.CYAN,Color.ORANGE,Color.BLUE,Color.MAGENTA,Color.PINK },
-    		{ Color.BLUE,Color.YELLOW,Color.CYAN,Color.MAGENTA,Color.RED,Color.ORANGE,Color.PINK,Color.GREEN },
-    		{ Color.MAGENTA,Color.CYAN,Color.YELLOW,Color.BLUE,Color.GREEN,Color.PINK,Color.ORANGE,Color.RED },
-    		{ Color.CYAN,Color.GREEN,Color.RED,Color.YELLOW,Color.PINK,Color.MAGENTA,Color.BLUE,Color.ORANGE }
-            };
+    private static final Color PURPLE = new Color(127, 0, 255);
+    private static final Color BROWN = new Color(102, 51, 0);
+    private static final Color PINK = new Color(255, 153, 204);
+    
+    private static final Color[][] colors = {{ Color.ORANGE, Color.BLUE, PURPLE, PINK,Color.YELLOW,Color.RED,Color.GREEN,BROWN},
+    		{ Color.RED,Color.ORANGE,PINK,Color.GREEN,Color.BLUE,Color.YELLOW,BROWN,PURPLE },
+    		{ Color.GREEN,PINK,Color.ORANGE,Color.RED,PURPLE,BROWN,Color.YELLOW,Color.BLUE },
+    		{ PINK,PURPLE,Color.BLUE,Color.ORANGE,BROWN,Color.GREEN,Color.RED,Color.YELLOW },
+    		{ Color.YELLOW,Color.RED,Color.GREEN,BROWN,Color.ORANGE,Color.BLUE,PURPLE,PINK },
+    		{ Color.BLUE,Color.YELLOW,BROWN,PURPLE,Color.RED,Color.ORANGE,PINK,Color.GREEN },
+    		{ PURPLE,BROWN,Color.YELLOW,Color.BLUE,Color.GREEN,PINK,Color.ORANGE,Color.RED },
+    		{ BROWN,Color.GREEN,Color.RED,Color.YELLOW,PINK,PURPLE,Color.BLUE,Color.ORANGE } };
 
     public KamisadoBoard() {
         this.board = initalizeBoard(BOARD_SIZE, SQUARES);
