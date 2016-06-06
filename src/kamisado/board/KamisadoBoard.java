@@ -6,34 +6,39 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class KamisadoBoard extends JPanel
+public class KamisadoBoard 
 {
-   JPanel panel;
+   JPanel panel = new JPanel();
+   JFrame frame = new JFrame("Kamisado");
    KamisadoBoardPiece boardPiece = new KamisadoBoardPiece();
-   
    public KamisadoBoard()
    {
-      this.setBounds(400, 400, 600, 300);
-      this.setVisible(true);
-      panel = new JPanel();
-      panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-      panel.add(boardPiece.squares[0][1]);
-      panel.add(boardPiece.squares[0][2]);
+    
+      panel.setLayout(new GridBagLayout());
+      GridBagConstraints gbc = new GridBagConstraints();
+      gbc.insets = new Insets(1,1,1,1);
+      for (int x=0; x<8;x++)
+         for (int y = 0; y<8; y++)
+         {
+            gbc.gridx = x;
+            gbc.gridy = y;
+            panel.add(boardPiece.squares[x][y], gbc);
+         }
+      frame.add(panel);
+      frame.setSize(1000, 1000);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      frame.pack();
+      frame.setVisible(true);
    }
  
    public static void main(String[] args)
    {
-      JFrame frame = new JFrame();
-      
-      frame = new JFrame("Kamisado");
-      frame.setSize(600, 600);
-      frame.setLocationRelativeTo(null);
-     
-     KamisadoBoard game = new KamisadoBoard();
-     frame.add(game);
-
-     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       frame.setVisible(true);
-       frame.setResizable(true);
+     SwingUtilities.invokeLater(new Runnable()
+     {
+        public void run()
+        {
+           new KamisadoBoard();
+        }
+     });
    }
 }
