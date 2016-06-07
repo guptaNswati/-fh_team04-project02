@@ -3,10 +3,14 @@ package kamisado.board;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.*;
 
 
-public class KamisadoBoard 
+
+
+public class KamisadoBoard extends JPanel
 {
    JPanel panel = new JPanel();
    JFrame frame = new JFrame("Kamisado");
@@ -24,13 +28,63 @@ public class KamisadoBoard
             gbc.gridy = y;
             panel.add(boardPiece.squares[x][y], gbc);
          }
+      ImageIcon BlackOrange = new ImageIcon(new ImageIcon("BlackOrange.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[0][0].add(new JLabel(BlackOrange));
+      
+      ImageIcon BlackBlue = new ImageIcon(new ImageIcon("BlackBlue.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[1][0].add(new JLabel(BlackBlue));
+      
+      ImageIcon BlackLightBlue = new ImageIcon(new ImageIcon("BlackLightBlue.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[2][0].add(new JLabel(BlackLightBlue));
+      
+      ImageIcon BlackPink = new ImageIcon(new ImageIcon("BlackPink.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[3][0].add(new JLabel(BlackPink));
+      
+      ImageIcon BlackYellow = new ImageIcon(new ImageIcon("BlackYellow.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[4][0].add(new JLabel(BlackYellow));
+      
+      ImageIcon BlackRed = new ImageIcon(new ImageIcon("BlackRed.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[5][0].add(new JLabel(BlackRed));
+      
+      ImageIcon BlackGreen = new ImageIcon(new ImageIcon("BlackGreen.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[6][0].add(new JLabel(BlackGreen));
+      
+      ImageIcon BlackBrown = new ImageIcon(new ImageIcon("BlackBrown.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[7][0].add(new JLabel(BlackBrown));
+      
+      ImageIcon WhiteOrange = new ImageIcon(new ImageIcon("WhiteOrange.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[0][7].add(new JLabel(WhiteOrange));
+      
+      ImageIcon WhiteBlue = new ImageIcon(new ImageIcon("WhiteBlue.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[1][7].add(new JLabel(WhiteBlue));
+      
+      ImageIcon WhiteLightBlue = new ImageIcon(new ImageIcon("WhiteLightBlue.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[2][7].add(new JLabel(WhiteLightBlue));
+      
+      ImageIcon WhitePink = new ImageIcon(new ImageIcon("WhitePink.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[3][7].add(new JLabel(WhitePink));
+      
+      ImageIcon WhiteYellow = new ImageIcon(new ImageIcon("WhiteYellow.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[4][7].add(new JLabel(WhiteYellow));
+      
+      ImageIcon WhiteRed = new ImageIcon(new ImageIcon("WhiteRed.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[5][7].add(new JLabel(WhiteRed));
+      
+      ImageIcon WhiteGreen = new ImageIcon(new ImageIcon("WhiteGreen.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[6][7].add(new JLabel(WhiteGreen));
+      
+      ImageIcon WhiteBrown = new ImageIcon(new ImageIcon("WhiteBrown.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+      boardPiece.squares[7][7].add(new JLabel(WhiteBrown));
+   
       frame.add(panel);
       frame.setSize(1000, 1000);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       frame.pack();
       frame.setVisible(true);
    }
- 
+   
+             
+      
    public static void main(String[] args)
    {
      SwingUtilities.invokeLater(new Runnable()
