@@ -56,22 +56,22 @@ public class KamisadoBoard extends JPanel
       boardPiece.squares[0][7].add(new JLabel(WhiteOrange));
       
       ImageIcon WhiteBlue = new ImageIcon(new ImageIcon("WhiteBlue.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
-      boardPiece.squares[1][7].add(new JLabel(WhiteBlue));
+      boardPiece.squares[6][7].add(new JLabel(WhiteBlue));
       
       ImageIcon WhiteLightBlue = new ImageIcon(new ImageIcon("WhiteLightBlue.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
-      boardPiece.squares[2][7].add(new JLabel(WhiteLightBlue));
+      boardPiece.squares[5][7].add(new JLabel(WhiteLightBlue));
       
       ImageIcon WhitePink = new ImageIcon(new ImageIcon("WhitePink.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
-      boardPiece.squares[3][7].add(new JLabel(WhitePink));
+      boardPiece.squares[4][7].add(new JLabel(WhitePink));
       
       ImageIcon WhiteYellow = new ImageIcon(new ImageIcon("WhiteYellow.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
-      boardPiece.squares[4][7].add(new JLabel(WhiteYellow));
+      boardPiece.squares[3][7].add(new JLabel(WhiteYellow));
       
       ImageIcon WhiteRed = new ImageIcon(new ImageIcon("WhiteRed.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
-      boardPiece.squares[5][7].add(new JLabel(WhiteRed));
+      boardPiece.squares[2][7].add(new JLabel(WhiteRed));
       
       ImageIcon WhiteGreen = new ImageIcon(new ImageIcon("WhiteGreen.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
-      boardPiece.squares[6][7].add(new JLabel(WhiteGreen));
+      boardPiece.squares[1][7].add(new JLabel(WhiteGreen));
       
       ImageIcon WhiteBrown = new ImageIcon(new ImageIcon("WhiteBrown.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
       boardPiece.squares[7][7].add(new JLabel(WhiteBrown));
