@@ -5,6 +5,9 @@
  */
 package kamisado.websocket.server;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
+import java.math.BigDecimal;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -17,6 +20,13 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashMap;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonArray;
+
 
 /**
  * WebSocketServer for CS40A Team04Project02
@@ -31,7 +41,7 @@ public class WebSocketServer {
     private static int sessionCount=0;
     //private static Session[] playerSessions = new Session[10];
     private static  Map<Integer,KamisadoSessionPair> gameSessions =
-            new HashMap<Integer,KamisadoSessionPair>();
+            new ConcurrentHashMap<Integer,KamisadoSessionPair>();
     
     @OnOpen
     public void open(Session session) {
@@ -58,6 +68,21 @@ public class WebSocketServer {
         session.getUserProperties().put("game", game );
 
         System.out.println("open...game("+game+") -- player("+player+") -- sessionCount="+sessionCount);
+        
+        // Send message back to browser with Player color ( WHITE / BLACK )
+        
+        JsonObjectBuilder bldr = Json.createObjectBuilder();
+        
+        String playerString= player==0?"WHITE":"BLACK";
+        bldr.add("type", "login");
+        bldr.add("player",playerString);
+        
+        sendMessage(session, bldr.build().toString());
+        
+        if ( player==1 ) {
+            sendPlayMessage( pair );
+        }
+        
     }
 
     @OnClose
@@ -71,22 +96,68 @@ public class WebSocketServer {
     @OnMessage
         public void handleMessage(String message, Session session) {
             
+            JsonObject jsonObj = Json.createReader( new BufferedReader( new StringReader( message) )).readObject();
+
             int player = (Integer) session.getUserProperties().get("player");
             int game = (Integer) session.getUserProperties().get("game");
             
-            System.out.println("message from player "+player+" game "+game+" :"+message);
-
             KamisadoSessionPair pair = gameSessions.get(game);
-            if ( pair.getSession(1)==null || pair.getSession(0)==null ) return; 
+            if ( pair.getSession(1)==null || pair.getSession(0)==null ) return;
             
             int otherPlayer = ( player==0)?1:0;
             Session otherSession = pair.getSession(otherPlayer);
-            
-            try {
-                otherSession.getBasicRemote().sendText(message);
+            Session thisSession = pair.getSession(player);
+                          
+            switch ( jsonObj.getString("type") ) {
+                                   
+                    case "move":
+                        
+                        sendMessage( otherSession, message );
+                        break;
+                        
+                    case "nickname":
+                        
+                        thisSession.getUserProperties().put("nickname", jsonObj.getString("nickname"));
+                        break;
+                        
+                    case "chat":
+                        
+                        sendMessage( otherSession, message );
+                        break;
+
             }
-            catch( Exception ex ) {
-                ex.printStackTrace();
-            } 
+    }
+        
+    private void sendPlayMessage( KamisadoSessionPair pair ) {
+        
+        JsonObjectBuilder bldr = Json.createObjectBuilder();
+        
+        bldr.add("type", "play" );
+        
+        try {
+        
+            sendMessage( pair.getSession(0), bldr.build().toString() );
+            sendMessage( pair.getSession(1), bldr.build().toString() );
+        
+        }
+        catch( Exception ex ) {
+            
+            System.out.println("Error while sending 'play' message...");
+        
+        }
+    }
+    
+    private void sendMessage( Session s, String msg ) {
+        
+        try {
+            
+            s.getBasicRemote().sendText(msg);
+            
+        }
+        catch( Exception ex ) {
+            
+            System.out.println("Exception while sneding message to browser...");
+            
+        }
     }
 }

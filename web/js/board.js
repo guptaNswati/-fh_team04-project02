@@ -17,10 +17,10 @@
  * @type Array --  Colors for Entire 8x8 Kamisado Board
  */
 
-var Player;
-var KColors;
+//var Player;
+//var KColors;
 
-var boardColors = [ [ KColors.ORANGE, KColors.BLUE, KColors.PURPLE, KColors.PINK,KColors.YELLOW,KColors.RED,KColors.GREEN,KColors.BROWN ],
+/*var*/  boardColors = [ [ KColors.ORANGE, KColors.BLUE, KColors.PURPLE, KColors.PINK,KColors.YELLOW,KColors.RED,KColors.GREEN,KColors.BROWN ],
                     [ KColors.RED,KColors.ORANGE,KColors.PINK,KColors.GREEN,KColors.BLUE,KColors.YELLOW,KColors.BROWN,KColors.PURPLE ],
                     [ KColors.GREEN,KColors.PINK,KColors.ORANGE,KColors.RED,KColors.PURPLE,KColors.BROWN,KColors.YELLOW,KColors.BLUE ],
                     [ KColors.PINK,KColors.PURPLE,KColors.BLUE,KColors.ORANGE,KColors.BROWN,KColors.GREEN,KColors.RED,KColors.YELLOW ],
@@ -29,8 +29,8 @@ var boardColors = [ [ KColors.ORANGE, KColors.BLUE, KColors.PURPLE, KColors.PINK
                     [ KColors.PURPLE,KColors.BROWN,KColors.YELLOW,KColors.BLUE,KColors.GREEN,KColors.PINK,KColors.ORANGE,KColors.RED ],
 		    [ KColors.BROWN,KColors.GREEN,KColors.RED,KColors.YELLOW,KColors.PINK,KColors.PURPLE,KColors.BLUE,KColors.ORANGE ] ];
                 
-var boardPieces = [];   // 8x8 array of Pieces
-var pieceLocations = [];   // 2x8 array of Squares
+/*var*/ boardPieces = [];   // 8x8 array of Pieces
+/*var*/ pieceLocations = [];   // 2x8 array of Squares
 
 function Board() {
     
@@ -130,7 +130,7 @@ Board.prototype.setPieceLocation = function(/*Piece*/ p, /*Square*/ loc ) {
  */
 Board.prototype.move = function(/*Piece*/ p, /*Square*/ s) {
     
-    alert("in Board.move()");
+    //alert("in Board.move()");
     
     start = pieceLocations[p.getPlayer().value][p.getPieceColor().value];
     // set board piece square ( start ) to null;

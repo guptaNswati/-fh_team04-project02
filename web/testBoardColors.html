@@ -25,6 +25,7 @@ and open the template in the editor.
            var previousPieceSelected=null;
            
            var board = new Board();
+           var boardSquareSize = 60;
               
            function f(rowNum) {
                
@@ -33,8 +34,8 @@ and open the template in the editor.
                for ( x = 0; x < 8; x++ ) {
                    
                    canv = document.createElement("canvas");
-                   canv.setAttribute("height",80);
-                   canv.setAttribute("width",80);
+                   canv.setAttribute("height",boardSquareSize);
+                   canv.setAttribute("width",boardSquareSize);
                    canv.setAttribute("id","square"+x+","+rowNum);
                    
                    //alert("in f() -- x:"+x+" y:"+y);
@@ -52,11 +53,13 @@ and open the template in the editor.
                
                brd = document.getElementById("board");
 
+               alert("shoeBoard ...");
+
                for ( y=0; y < 8; y++ ) {
                    
                    row = document.createElement("div");
                    row.setAttribute("id","row"+y);
-                   row.setAttribute("height",80);
+                   row.setAttribute("height",boardSquareSize);
                    
                    brd.appendChild(row);
                    
@@ -90,12 +93,12 @@ and open the template in the editor.
                 ctx.fillStyle=piece.getPlayer().colorcode;
     
                 ctx.beginPath();
-                ctx.arc(40,40,35,0,2*Math.PI);
+                ctx.arc(boardSquareSize/2,boardSquareSize/2,boardSquareSize/2-5,0,2*Math.PI);
                 ctx.fill();
 
                 ctx.fillStyle=piece.getPieceColor().colorcode;
                 ctx.beginPath();
-                ctx.arc(40,40,15,0,2*Math.PI);
+                ctx.arc(boardSquareSize/2,boardSquareSize/2,boardSquareSize/2-25,0,2*Math.PI);
                 ctx.fill();
                 
            }
@@ -139,13 +142,13 @@ and open the template in the editor.
                 
                     ctx.fillStyle=piece.getPlayer().colorcode;
                     ctx.beginPath();
-                    ctx.arc(40,40,10,0,2*Math.PI);
+                    ctx.arc(boardSquareSize/2,boardSquareSize/2,boardSquareSize/8,0,2*Math.PI);
                     ctx.fill();
                     
                 }
                 else {
                     
-                    ctx.clearRect(0,0,80,80);      
+                    ctx.clearRect(0,0,boardSquareSize,boardSquareSize);      
                     
                 }
         
@@ -189,7 +192,7 @@ and open the template in the editor.
                // clear current square
                canv = document.getElementById("square"+currSq.getX()+","+currSq.getY());
                ctx = canv.getContext("2d");
-               ctx.clearRect(0,0,80,80);  
+               ctx.clearRect(0,0,boardSquareSize,boardSquareSize);  
                
                //update model
                board.move( p, sq );
