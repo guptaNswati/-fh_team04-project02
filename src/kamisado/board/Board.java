@@ -54,4 +54,7 @@ public interface Board {
 	 */
 	public void render();
 	
+	public Square getSquarePieceIsOn(Piece p);
+	
+	public boolean checkWinCondition(Piece p, Square s);
 }

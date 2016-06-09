@@ -37,4 +37,11 @@ public class Square {
 		return "("+x+","+y+")";
 	}
 	
+	@Override
+	public boolean equals( Object o) {
+		if ( ! ( o instanceof Square )) return false;
+		Square s = ( Square ) o;
+		return s.getX() == getX() && s.getY() == getY();
+	}
+	
 }
