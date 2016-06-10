@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 
-public class KamisadoBoard //implements MouseInputListener
+public class KamisadoBoard implements MouseInputListener
 {	
 	   private JFrame frame;
 	   private JPanel panel;
@@ -18,32 +18,31 @@ public class KamisadoBoard //implements MouseInputListener
 		  panel = new JPanel();
 		  board = new KBoard();
 	      
+		  panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		  
-	      panel.setLayout(new GridBagLayout());
-	      GridBagConstraints gbc = new GridBagConstraints();
-	      gbc.insets = new Insets(1,1,1,1);
-	      	      
-	      for (int x=0; x < 8; x++)
-	      {	         
-	    	  for (int y = 0; y < 8; y++)
-	         {
-	            gbc.gridx = y;
-	            gbc.gridy = x;
-	            panel.add(board.panelSquares[x][y].getPanel(), gbc);
-	            
-	           
-	         }
-	      }
-	      
-	      
-//	      panel.addMouseListener(this);		   
+		  for (int x=0; x < 8; x++)
+		  {	 
+			  JPanel rowPanel = new JPanel();
+			  rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
+			  for (int y = 0; y < 8; y++)
+			  {
+				  PanelSquare ps = board.panelSquares[x][y];
+				  ps.setPreferredSize(new Dimension(50, 50));
+				  ps.setSize(new Dimension(50, 50));
+				  rowPanel.add(ps);
+				  board.panelSquares[x][y].addMouseListener(this);
+
+			  }
+			  panel.add(rowPanel);
+		      
+		  }   
 	      frame.add(panel);
-	      frame.setSize(1000, 1000);
+	      //frame.setSize(1000, 1000);
 	      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	      frame.pack();
-	      frame.setVisible(true);
-	      
+//	      frame.setResizable(false);
 	     
+	      frame.setVisible(true);	     
    }
 	   
 	   public boolean isEmpty(JPanel panel)
@@ -86,70 +85,7 @@ public class KamisadoBoard //implements MouseInputListener
 		   return listOfPanels;
 	   }
    
-	   
-//@Override
-//public void mouseClicked(MouseEvent e) {
-//	
-//	if(e.getSource() == panel.getComponent(1)) //board.panelSquares[0][0].getPanel() || e.getSource() == board.panelSquares[0][0].getLabel())
-//	{
-//		System.out.println("hello");
-//		
-//	}
-//	
-//	ArrayList<PanelSquare> validPanels = movesForBlackOrange();
-////	
-//	System.out.println("source  " + e.getSource());
-//	System.out.println("compo " + e.getComponent());
-////	
-////	
-//	if(e.getSource() == board.panelSquares[0][0] )
-//	{
-//		System.out.println("hello");
-////		
-//	}
-////	
-//	if(e.getComponent() == board.panelSquares[0][0].getPanel() )
-//	{
-//		System.out.println("hello");
-//	}
-//}
-//		
-//	}
-//	
-//	for(int i = 0; i < validPanels.size(); i++)
-//	{
-//		if(e.getSource() == validPanels.get(i).getPanel())
-//		{
-//			System.out.println("hello");
-//			
-//			validPanels.get(i).setLabel(board.pieces.blackPieces[0]);
-//
-//		}
-//	   }
-	
-//	if(e.equals(board.pieces.blackPieces[0]))
-//	{
-//		movesForBlackOrange();
-		
-//	}
-
-//}
-//
-//
-//
-//@Override
-//public void mousePressed(MouseEvent e) { }
-//@Override
-//public void mouseReleased(MouseEvent e) { }
-//@Override
-//public void mouseEntered(MouseEvent e) { }
-//@Override
-//public void mouseExited(MouseEvent e) { }
-//@Override
-//public void mouseDragged(MouseEvent e) { }
-//@Override
-//public void mouseMoved(MouseEvent e) { }
-
+	  
 public static void main(String[] args)
 {
   SwingUtilities.invokeLater(new Runnable()
@@ -159,6 +95,60 @@ public static void main(String[] args)
         new KamisadoBoard();
      }
   });
+}
+
+@Override
+public void mouseClicked(MouseEvent e) {
+	// TODO Auto-generated method stub
+
+	
+	PanelSquare ps = (PanelSquare) e.getSource();
+	System.out.println(" ps " + ps.getXX() + ", " + ps.getYY());
+	
+	PanelSquare ps1 = board.panelSquares[1][0];
+	ps1.setLabel(board.pieces.blackPieces[0]);
+	ps1.repaint();
+	
+	PanelSquare ps2 = board.panelSquares[0][0];
+	ps2.setLabel(new JLabel());
+	ps2.repaint();
+	
+}
+
+@Override
+public void mousePressed(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseReleased(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseEntered(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseExited(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseDragged(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseMoved(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
 }
 
 
