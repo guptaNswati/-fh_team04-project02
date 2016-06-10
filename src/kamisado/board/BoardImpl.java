@@ -2,6 +2,8 @@ package kamisado.board;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 
 public class BoardImpl implements Board {
 	
@@ -115,14 +117,14 @@ public class BoardImpl implements Board {
 
 	@Override
 	public List<Square> getAllowableMoves(Piece p) {
-		System.out.println("teststartgetallow");
+		//System.out.println("teststartgetallow");
 		List<Square> sqList = new ArrayList<Square>();
 		boolean isValid = true;
 		Square pieceSquare = getSquarePieceIsOn(p);
 		Square checkSquare = pieceSquare;
 		Square newSquare;
 		if (p.getPlayer() == Player.WHITE){
-			System.out.println("test getallow white");
+			//System.out.println("test getallow white");
 			while (isValid){
 				//System.out.println("test getallow white left");
 				if (((checkSquare.getX()-1) >= 0) && ((checkSquare.getY()+1) <= 7)){  
@@ -241,9 +243,9 @@ public class BoardImpl implements Board {
 				}
 			}
 		}
-		System.out.println("testendgetallow");
+		//System.out.println("testendgetallow");
 		
-		System.out.println( sqList );
+		//System.out.println( sqList );
 		
 		return sqList;
 	}
@@ -263,6 +265,71 @@ public class BoardImpl implements Board {
 			System.out.println("Game's not over!");
 			return false;
 		}
+	}
+	
+	public boolean computerMove(Piece p){
+		Square moveTo = null;
+		boolean won = false;
+		Random randomGenerator = new Random();
+		List <Square> safeMoves = new ArrayList<Square>();
+		System.out.println("initiate!");
+		for (int i = 0; i < getAllowableMoves(p).size(); i++){
+			if ((getAllowableMoves(p).get(i).getY() == 0) || (getAllowableMoves(p).get(i).getY() == 7)){
+				moveTo = getAllowableMoves(p).get(i);
+			}
+		}
+
+		System.out.println("not a winner!");
+		if (moveTo == null){
+			System.out.println("moveTo null");
+			for (int i = 0; i < getAllowableMoves(p).size(); i++){
+				if (lookAhead(p, getAllowableMoves(p).get(i))){
+					safeMoves.add(getAllowableMoves(p).get(i));
+				}
+			}
+			
+			int random = randomGenerator.nextInt(safeMoves.size());
+			moveTo = safeMoves.get(random);
+		}
+		System.out.println("done!");
+		won = move(p, moveTo);
+		return won;
+	}
+	
+	public boolean lookAhead(Piece p, Square s){
+		boolean safe = true;
+		Color color = getSquareColor(s);
+		Square initSq = getSquarePieceIsOn(p);
+		Piece nextP = null;
+		
+		setBoardPiece( initSq, null);
+		setBoardPiece( s, p );
+		setPieceLocation( p , s);
+		
+		System.out.println("Looking ahead!");
+		for (int i = 0; i < 8; i++){
+			for (int j = 0; j < 8; j++){
+				if ((getPieceOnSquare(i,j) != null)){
+					if  ((color == (getPieceOnSquare(i,j).getColor()) &&
+					p.getPlayer() != getPieceOnSquare(i,j).getPlayer())){
+						System.out.println("good");
+					nextP = getPieceOnSquare(i, j);
+					}
+				}
+			}
+		}
+		System.out.println(nextP.getColor().toString());
+		for (int i = 0; i < getAllowableMoves(nextP).size(); i++){
+			if ((getAllowableMoves(nextP).get(i).getY() == 0) || (getAllowableMoves(nextP).get(i).getY() == 7)){
+				safe = false;
+			}
+		}
+		
+		setBoardPiece( s, null);
+		setBoardPiece( initSq, p );
+		setPieceLocation( p , initSq);
+		
+		return safe;
 	}
 	
 	/**

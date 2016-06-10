@@ -20,6 +20,8 @@ public class SimpleBoardRender {
 		while (gameOver == false){
 			System.out.println("The active piece is: " + p.toString());
 			
+			if (p.getPlayer() == Player.WHITE){
+			
 			if (b.getAllowableMoves(p).isEmpty() == false){
 			
 				System.out.println("ok");
@@ -54,8 +56,8 @@ public class SimpleBoardRender {
 			//square = b.getSquarePieceIsOn(p);
 			color = b.getSquareColor(square);
 			
+			
 			for (int i = 0; i < 8; i++){
-				
 				for (int j = 0; j < 8; j++){
 					if ((b.getPieceOnSquare(i,j) != null)){
 						if  ((color == (b.getPieceOnSquare(i,j).getColor()) &&
@@ -76,6 +78,41 @@ public class SimpleBoardRender {
 				p = nextP;
 				valid = false;
 				b.render();
+			}
+			}
+			
+			//piece is black
+			else {
+				if (b.getAllowableMoves(p).isEmpty() == false){
+					win = b.computerMove(p);
+					square = b.getSquarePieceIsOn(p);
+					color = b.getSquareColor(square);
+					
+					
+					for (int i = 0; i < 8; i++){
+						for (int j = 0; j < 8; j++){
+							if ((b.getPieceOnSquare(i,j) != null)){
+								if  ((color == (b.getPieceOnSquare(i,j).getColor()) &&
+								p.getPlayer() != b.getPieceOnSquare(i,j).getPlayer())){
+								nextP = b.getPieceOnSquare(i, j);
+								}
+							}
+						}
+					}
+					
+					if (win == true){
+						System.out.println("winCheckTrue");
+						gameOver = true;
+						b.render();
+					}
+					
+					else {
+						System.out.println("winCheckFalse");
+						p = nextP;
+						valid = false;
+						b.render();
+					}
+				}
 			}
 		}
 		
