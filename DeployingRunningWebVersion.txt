@@ -1,0 +1,14 @@
+Options for seeing a working version of our web version of Kamisado:
+
+  1)  Deploy into a compliant JEE 7 app server ( like glass fish )  ( deploy the KamisadoClient.war file ).
+  2) Use webapp-runner.jar and the KamisadoClient.war file ( ** )
+  3) Access the deployed version on a hosted service ( like heroku ) **
+
+Am working on getting the web implementation up and running on tomcat and webapp-runner.  Have a running version in glassfish ( deployed using NetBeans IDE ).
+
+After “deploying” go to an URL like:
+
+   http://localhost:8080/KamisadoClient/KAMISADO.html***
+   http://localhost:8080/KAMISADO.htlm***
+
+***  Depending on where the .war file was deployed on the server.
