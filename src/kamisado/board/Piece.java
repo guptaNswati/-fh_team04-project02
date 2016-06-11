@@ -1,3 +1,9 @@
+
+import java.awt.Color;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
 package kamisado.board;
 
 public class Piece {
@@ -28,8 +34,17 @@ public class Piece {
 		this.player = player;
 	}
 
+	public boolean equals( Object o ) {
+		
+		if ( !( o instanceof Piece ) ) return false;
+		
+		Piece p = (Piece)o;
+		return ( (p.getPlayer()==getPlayer()) && ( p.getColor()==getColor()) );		
+		
+	}
 	public String toString() {
 		return "("+player.name()+","+color.name()+")";
 	}
 
 }
+

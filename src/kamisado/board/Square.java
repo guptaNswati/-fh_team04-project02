@@ -1,4 +1,5 @@
 package kamisado.board;
+
 /**
  * 
  * @author chris
@@ -17,8 +18,7 @@ public class Square {
 		setY(y);
 		
 	}
-	
-	//***
+
 	
 	public int getX() {
 		return x;
@@ -32,9 +32,19 @@ public class Square {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public boolean equals( Object o ) {
+		
+		if ( !(o instanceof Square)) return false;
+		Square sq = (Square)o;
+		
+		return ( (sq.getX()==getX()) && (sq.getY()==getY()) );
+		
+	}
 
 	public String toString() {
 		return "("+x+","+y+")";
 	}
 	
+
 }
