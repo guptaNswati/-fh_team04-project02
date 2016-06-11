@@ -1,30 +1,50 @@
+
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+package kamisado.board;
 
 public class Piece {
+	
+	private Color color;
+	private Player player;
+	
+	public Piece( Player p, Color c ) {
+		
+		setColor(c);
+		setPlayer(p);
+		
+	}
 
-        private Color color;
+	public Color getColor() {
+		return color;
+	}
 
-        private Point coordinate;
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
-        public Color getColor() {
-            return color;
-        }
+	public Player getPlayer() {
+		return player;
+	}
 
-        public void setColor(Color color) {
-            this.color = color;
-        }
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
-        public Point getCoordinate() {
-            return coordinate;
-        }
+	public boolean equals( Object o ) {
+		
+		if ( !( o instanceof Piece ) ) return false;
+		
+		Piece p = (Piece)o;
+		return ( (p.getPlayer()==getPlayer()) && ( p.getColor()==getColor()) );		
+		
+	}
+	public String toString() {
+		return "("+player.name()+","+color.name()+")";
+	}
 
-        public void setCoordinate(Point coordinate) {
-            this.coordinate = coordinate;
-        }
-
-    }
+}
 

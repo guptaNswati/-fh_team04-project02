@@ -1,7 +1,5 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+
+package kamisado.board;
 
 /**
  * 
@@ -12,35 +10,42 @@ import java.awt.Rectangle;
  */
 
 public class Square {
-	private java.awt.Color color;
-
-    private Point coordinate;
-
-    private Rectangle drawingRectangle;
-
-    public Point getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Point coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public Rectangle getDrawingRectangle() {
-        return drawingRectangle;
-    }
-
-    public void setDrawingRectangle(Rectangle drawingRectangle) {
-        this.drawingRectangle = drawingRectangle;
-    }
-
-    public java.awt.Color getColor() {
-        return color;
-    }
-
-	public void setColor(Color green) {
-		// TODO Auto-generated method stub
-		this.color = green;
+	
+	private int x,y;
+	
+	public Square(int x, int y ) {
+		
+		setX(x);
+		setY(y);
 		
 	}
+
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public boolean equals( Object o ) {
+		
+		if ( !(o instanceof Square)) return false;
+		Square sq = (Square)o;
+		
+		return ( (sq.getX()==getX()) && (sq.getY()==getY()) );
+		
+	}
+
+	public String toString() {
+		return "("+x+","+y+")";
+	}
+	
+
 }
