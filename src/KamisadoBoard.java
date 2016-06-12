@@ -1,22 +1,26 @@
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.awt.Dimension;
+import java.awt.Image;
 
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class KamisadoBoard implements MouseInputListener
 {	
 	   private JFrame frame;
 	   private JPanel panel;
 	   private KBoard board;
-	   
+	   private BoardImpl gameRules;
 	   
 	   public KamisadoBoard()
 	   {
 		  frame = new JFrame("Kamisado");
 		  panel = new JPanel();
 		  board = new KBoard();
+		  gameRules = new BoardImpl();
 	      
 		  panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		  
@@ -29,13 +33,22 @@ public class KamisadoBoard implements MouseInputListener
 				  PanelSquare ps = board.panelSquares[x][y];
 				  ps.setPreferredSize(new Dimension(50, 50));
 				  ps.setSize(new Dimension(50, 50));
+				  ps.addImageLabel(new JLabel(null, Symbols.symbols[x][y], JLabel.CENTER));
 				  rowPanel.add(ps);
-				  board.panelSquares[x][y].addMouseListener(this);
+				  ps.addMouseListener(this);
 
 			  }
 			  panel.add(rowPanel);
 		      
-		  }   
+		  }  
+		  ImageIcon BlackOrange = new ImageIcon(new ImageIcon("Images/Symbol1.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+	     JLabel label = new JLabel(null, BlackOrange, JLabel.CENTER);
+	     JLabel label2 = new JLabel(null, BlackOrange, JLabel.CENTER);
+	     
+	     board.panelSquares[3][3].addImageLabel(label2);
+		  board.panelSquares[6][0].setLabel(label);
+		  
+//		  board.panelSquares[2][0].add(BlackOrange);
 	      frame.add(panel);
 	      //frame.setSize(1000, 1000);
 	      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -102,16 +115,17 @@ public void mouseClicked(MouseEvent e) {
 	// TODO Auto-generated method stub
 
 	
+	gameRules.getAllowableMoves((Piece)e.getSource());
 	PanelSquare ps = (PanelSquare) e.getSource();
 	System.out.println(" ps " + ps.getXX() + ", " + ps.getYY());
 	
 	PanelSquare ps1 = board.panelSquares[1][0];
 	ps1.setLabel(board.pieces.blackPieces[0]);
-	ps1.repaint();
+//	ps1.repaint();
 	
 	PanelSquare ps2 = board.panelSquares[0][0];
 	ps2.setLabel(new JLabel());
-	ps2.repaint();
+//	ps2.repaint();
 	
 }
 
@@ -151,5 +165,3 @@ public void mouseMoved(MouseEvent e) {
 	
 }
 
-
-}
