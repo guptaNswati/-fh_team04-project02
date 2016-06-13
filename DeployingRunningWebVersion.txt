@@ -1,14 +1,14 @@
 Options for seeing a working version of our web version of Kamisado:
 
-  1)  Deploy into a compliant JEE 7 app server ( like glass fish )  ( deploy the KamisadoClient.war file ).
+  1) Deploy into a compliant JEE 7 app server ( like glassfish or tomcat )*
   2) Use webapp-runner.jar and the KamisadoClient.war file ( ** )
   3) Access the deployed version on a hosted service ( like heroku ) **
+  
+  *)  Have created a versoin that runs on tomcat ( 8.0.35 ).  Place Kamisado.war into the webapps folder and startup tomcat.
+      Point 2 browsers to http://localhost:8080/Kamisado/KAMISADO.html.  In each browser you will see a text field that tell the user
+      their player color.  Whie moves first so initially click on a white piece to indicate the piece you are interested in moving.  Then
+      click on one of the allowable move squares ( show by a dot in the center of the sqaure ). Both players will see the updated board
+      with the just moved piece.  Thne on the Black player's board,  the alloable moves will be show.  Then,  the other player's
+      allowable moves will be shown and the play chooses the move he/she can make.
 
-Am working on getting the web implementation up and running on tomcat and webapp-runner.  Have a running version in glassfish ( deployed using NetBeans IDE ).
-
-After “deploying” go to an URL like:
-
-   http://localhost:8080/KamisadoClient/KAMISADO.html***
-   http://localhost:8080/KAMISADO.htlm***
-
-***  Depending on where the .war file was deployed on the server.
+  **) I'm working on getting the web implementation up and running with webapp-runner.  Have a running version in glassfish ( deployed using NetBeans IDE and a version for tomcat as well ).
