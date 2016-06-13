@@ -1,4 +1,7 @@
-README.txt
+README.txt		Text file containing inforation abouut this project ( CS40A Team04 Project 2 )
+
+Kamisado.war		.war file that can run the web version of our KAMISADO board game.
+			Have tested in tomat 8.0.35 ( placed in the webapss folder )
 
 Board Interface and Implementation ( plus other associated files ):
 
@@ -16,6 +19,8 @@ kamisado.board package:
 			Kamisado board ( for location items on a board
 			like an available move and Piece location.
 
+* websocket endpoint and associated classes
+
 kamisado.websocket.server package:
 
    KamisadoSessionPair.java	A class that holds the Session information
@@ -24,12 +29,12 @@ kamisado.websocket.server package:
    WebSocketServer.java		A Websocket endpoint that manages messages
 				passed to and from the KAMISADO.html webpage.
 
-Other associated files:
+*  Other associated files ( used in web version )
 
 web/js folder:
 
    board.js		A ported version of the BoardImpl.java Board implementation.
-   enuns.js		Enumerations for Color and Player ( as in the above java			implemention )
+   enuns.js		Enumerations for Color and Player ( as in the above java implemention )
    piece.js		A js style object ( using prototype keyword ).
    square.js		Similar to the Square object in the java implementation.
 
