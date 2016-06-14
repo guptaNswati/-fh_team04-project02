@@ -323,6 +323,18 @@ public class BoardImpl implements Board {
 		setBoardPiece( s, p );
 		setPieceLocation( p , s);
 		
+		/*
+		iterate over occupied board locations ( piece ps )
+		  *  if ( color == ps.getColor() &&
+		          ps.getPlayer() != p.getPlayer() ) {
+		          	nextP = ps;
+		          	break chksafe;
+		          	
+		          }
+		}
+		chksafe:
+		*/
+		
 		System.out.println("Looking ahead!");
 		for (int i = 0; i < 8; i++){
 			for (int j = 0; j < 8; j++){
