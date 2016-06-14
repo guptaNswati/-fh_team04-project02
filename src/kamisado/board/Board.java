@@ -53,12 +53,33 @@ public interface Board {
 	 * prints simple text version to System.out
 	 */
 	public void render();
-	
+	/**
+	 * Get the Sqaure of the specified Piece
+	 * @param    p  -- the Piece to get the location ( Square ) of
+	 * @return      -- the Square ( location ) of the specified Piece ( p )
+	 */
 	public Square getSquarePieceIsOn(Piece p);
 	
+	/**
+	 * Check if a particular Piece (p) on Square (s) makes a "win" condition
+	 * @param p --  the Piece to check for winning condition
+	 * @parma s --  the square to check for winning condition
+	 * @return  --  true if the Piece p on Square s is a winning condition
+	 */
 	public boolean checkWinCondition(Piece p, Square s);
 	
-	public boolean computerMove(Piece p);
+	/**
+	 * BOT move
+	 * @param  p  -- the Piece the BOT is to move
+	 * @return    -- boolean ( winnig condition ? )
+	 */
+	 public boolean computerMove(Piece p);
 	
+	/**
+	 * BOT lookahead
+	 * @param p  --  Piece for lookahead
+	 * @param s  --  Square for lookahead
+	 * @return   --  true if ... ( winning condition )
+	 */
 	public boolean lookAhead(Piece p, Square s);
 }
