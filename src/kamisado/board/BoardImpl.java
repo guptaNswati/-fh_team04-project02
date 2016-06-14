@@ -273,6 +273,15 @@ public class BoardImpl implements Board {
 		Random randomGenerator = new Random();
 		List <Square> safeMoves = new ArrayList<Square>();
 		System.out.println("initiate!");
+		/*
+		List<Square> allowables = getAllowableMoves(p);
+		for ( Square sq : allowables ) {
+			if ( checkWinCondition( p, sq ) ) {
+				move(p, sq );
+				return true;
+			}
+		}
+		*/
 		for (int i = 0; i < getAllowableMoves(p).size(); i++){
 			if ((getAllowableMoves(p).get(i).getY() == 0) || (getAllowableMoves(p).get(i).getY() == 7)){
 				moveTo = getAllowableMoves(p).get(i);
@@ -280,6 +289,14 @@ public class BoardImpl implements Board {
 		}
 
 		System.out.println("not a winner!");
+		/*
+		for ( Square sq : allowables ) {
+			if ( lookahead(p,sq) ) safeMoves.add(sq);
+		}
+		int randum = randomGenerator.nextInt( safeMoves.size() );
+		move( p, safeMoves( randum );
+		return false;
+		*/
 		if (moveTo == null){
 			System.out.println("moveTo null");
 			for (int i = 0; i < getAllowableMoves(p).size(); i++){
