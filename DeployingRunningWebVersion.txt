@@ -1,14 +1,26 @@
 Options for seeing a working version of our web version of Kamisado:
 
-  1)  Deploy into a compliant JEE 7 app server ( like glass fish )  ( deploy the KamisadoClient.war file ).
+  1)  Deploy into a compliant JEE 7 app server ( like glassfish and tomcat )  ( deploy the Kamisado.war file into the webapps folder and startup the server ).  I have checked this with apache tomcat 8.0.35 and seems to work just fine ). *
+
   2) Use webapp-runner.jar and the KamisadoClient.war file ( ** )
+
   3) Access the deployed version on a hosted service ( like heroku ) **
+
+=======
 
 Am working on getting the web implementation up and running on tomcat and webapp-runner.  Have a running version in glassfish ( deployed using NetBeans IDE ).
 
-After “deploying” go to an URL like:
+=======
 
-   http://localhost:8080/KamisadoClient/KAMISADO.html***
-   http://localhost:8080/KAMISADO.htlm***
+*  After “deploying” ( for instance in tomcat webapps folder ) point your browser to:
 
-***  Depending on where the .war file was deployed on the server.
+   http://localhost:8080/Kamisado/KAMISADO.html 
+
+So,  to demonstrate our web version of Kamisado,  got to KAMISADO.html twice ( in the textarea there should be a message saying which player color is in the current browser ( both 
+
+
+
+***  Am working on getting our Kamisado web deloyed to heroku.
+
+====
+
