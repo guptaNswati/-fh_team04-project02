@@ -28,6 +28,13 @@ public interface Board {
 	public Piece getPieceOnSquare( Square s );
 
 	/**
+	 * return the Square the specified Piece is on
+	 * @param p  -- specified Piece
+	 * @return -- the Square the specified Piece is on.
+	 */
+	public Square getSquarePieceIsOn( Piece p );
+	
+	/**
 	 * 
 	 * @param p  -- the piece to be moved
 	 * @param s  -- the square to move the piece to
@@ -53,8 +60,7 @@ public interface Board {
 	 * prints simple text version to System.out
 	 */
 	public void render();
-	
-	public Square getSquarePieceIsOn(Piece p);
+
 	
 	public boolean checkWinCondition(Piece p, Square s);
 	
@@ -62,3 +68,4 @@ public interface Board {
 	
 	public boolean lookAhead(Piece p, Square s);
 }
+

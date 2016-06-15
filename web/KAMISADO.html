@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>KAMISADO</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script type="text/javascript" src="js/enums.js"></script>
+        <script type="text/javascript" src="js/piece.js"></script>
+        <script type="text/javascript" src="js/square.js"></script>
+        <script type="text/javascript" src="js/board.js"></script>
+        
+        <script type="text/javascript">
+            
+            // first global variables --
+            
+            var ws;  // websocket global variable 
+            var playerColor; // player color ( WHITE / BLACK )
+            var player; // Enum Player ( this Player's color ( Player.WHITE / Player.BLACK )
+            var nickname; // nickname of player...
+                        
+            var KColors;  // Kamisado colors ( board square colors..
+            var Player;  // Kamisado Player colors ( WHITE / BLACK )
+
+            var previousPieceSelected=null;
+
+            var board = new Board();
+            var boardSquareSize = 60;
+            
+            // next methods for board rendering ...
+            
+            //************************************************
+            
+            // render a single row of the board...
+            function renderrow(rowNum) {
+               
+               row = document.getElementById("row"+rowNum);
+
+               for ( x = 0; x < 8; x++ ) {
+
+                   canv = document.createElement("canvas");
+                   canv.setAttribute("height",boardSquareSize);
+                   canv.setAttribute("width",boardSquareSize);
+                   canv.setAttribute("id","square"+x+","+rowNum);
+
+                   //alert("in f() -- x:"+x+" y:"+y);
+                   kcolr = board.getSquareColorXY(x,y);
+
+                   colr = kcolr.colorcode;
+                   canv.style.background=colr;
+
+                   row.appendChild(canv);
+
+               }
+            }
+
+            // redner the entire Kamisado board ( without pieces )
+
+            function renderboard() {
+
+                brd = document.getElementById("board");
+
+                for ( y=0; y < 8; y++ ) {
+
+                    row = document.createElement("div");
+                    row.setAttribute("id","row"+y);
+                    row.setAttribute("height",boardSquareSize);
+
+                    brd.appendChild(row);
+
+                    renderrow(y);
+
+               }
+            }
+            
+            //**********************************************
+            // Next show initial position of pieces on board ...
+           
+            // show pieces (at start of Kamisado !!!  )     
+            function showPieces() {
+               
+               for ( var plyr in Player) {
+                   
+                   for ( var colr in KColors) {
+                       
+                       /*Piece*/ p = new Piece( Player[plyr], KColors[colr] );
+                       /*Square*/ sq = board.getSquarePieceIsOn(p);
+                       
+                       canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+                       renderPiece( canv, p );
+                       
+                   }
+               }
+               
+            }
+            
+            // render the piece on the board given its canvas
+            function renderPiece( canv, piece ) {
+                
+                ctx = canv.getContext("2d");
+                ctx.fillStyle=piece.getPlayer().colorcode;
+    
+                ctx.beginPath();
+                ctx.arc(boardSquareSize/2,boardSquareSize/2,boardSquareSize/2-5,0,2*Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle=piece.getPieceColor().colorcode;
+                ctx.beginPath();
+                ctx.arc(boardSquareSize/2,boardSquareSize/2,boardSquareSize/2-25,0,2*Math.PI);
+                ctx.fill();
+                
+           }
+           
+           //***************************************************
+           
+           //Next  show message in chat textarea...
+           function showMessageInChatArea( txt ) {
+
+               taobj = document.getElementById("chattext");
+               val = taobj.value;
+               taobj.value=val+"\n"+txt;
+
+           };
+           
+           //*************************************************
+           
+           //Next methods to initiate and handle websocket API...
+           function websocketInit() {
+
+                ws = new WebSocket("ws://localhost:8080/KamisadoClient/actions");
+
+                ws.onopen = function() {
+                    showMessageInChatArea("websocket open...");
+                };
+
+                ws.onmessage = function (evt) {
+
+                  message = evt.data;
+                  //showMessageInChatArea("rcvd msg = "+message );
+
+                  jsonobj = JSON.parse( message );
+
+                  switch( jsonobj.type ) {
+
+                     case "nickname":
+
+                       nickname = jsonobj.nickname;
+                       break;
+
+                     case "login":
+
+                         playerColor = jsonobj.player;
+                         player=Player[playerColor];
+                         showMessageInChatArea("You player color is "+playerColor );
+                         break;
+
+                     case "move":
+                         
+                         p = new Piece( jsonobj["piece"]["player"], jsonobj["piece"]["pcolor"] );
+                         sq = new Square( jsonobj["to"]["x"], jsonobj["to"]["y"] );
+                         
+                         // clear current piece square
+                         currentPieceLocation = board.getSquarePieceIsOn(p);
+                         canv = document.getElementById("square"+currentPieceLocation.getX()+","+currentPieceLocation.getY());
+                         ctx = canv.getContext("2d");
+                         ctx.clearRect(0,0,boardSquareSize,boardSquareSize);
+                         
+                         // render new Piece location...
+                         canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+                         renderPiece( canv, p );
+                         
+                         //update model...
+                         board.move(p,sq);
+                         
+                         if ( sq.getY()==0) {  // BLACK WIN!
+                             
+                             alert("BLACK WINS...");
+                             stop();
+                             break;
+                             
+                         }
+                         else if ( sq.getY()==7) { //WHITE WIN!
+                             
+                             alert("WHITE WINS...");
+                             stop();
+                             break;
+                             
+                         }
+               
+//                         if ( previousPieceSelected !== null ) {
+//                   
+//                             for ( x=0; x<8; x++ ) {
+//                                 canv = document.getElementById("square"+x+",0");
+//                                 canv.setAttribute("onclick","");
+//                             }
+//                        }
+                        
+                        // get the piece for next move...
+                        colr = board.getSquareColor(sq);
+                        /* Piece */ pp = new Piece( player, colr );
+               
+                        // show moves for next player and color ( will also set onclick mv for each mv )
+                        showMvs( pp, true );
+                        break;
+
+                     case "chat":
+                         showMessageInChatArea( jsonobj.message);
+                         break;
+                         
+                     case "play":
+                         
+                         if ( player == Player.WHITE ) { // first move!
+                             firstMove();
+                         }
+
+                  }
+
+                };
+
+        ws.onclose = function()
+        { 
+          showMessageInChatArea("websocket closed"); 
+        };
+        
+    };
+           
+        // set the nichname for this user browser...
+        function login( nick ) {
+
+           str = "{ \"type\" : \"nickname\", \"nickname\",\""+nick+"\" }";
+           ws.send( str );
+
+        };
+
+        // send a chat message to users opponent ( trash talk ... )
+        function sendChatMessage( msg ) {
+            
+           chatMessage = { type:"chat", message: msg };
+
+           ws.send( JSON.stringify( chatMessage ) );
+           showMessageInChatArea( msg );
+
+        };
+   
+           //Next onLoad initializations...
+           function onLoad() {
+
+               renderboard();
+               showPieces();
+                
+               websocketInit();
+
+            };
+           
+           // show avalble mvs for a particular piece ( set onclick to mv the piece )...
+           function showMvs( /*Piece*/ p, rendr ) {
+               
+               pstring = "new Piece(Player."+p.getPlayer().name+",KColors."+p.getPieceColor().name+")";
+               
+               allowables =board.getAllowableMoves(p);
+               
+               for ( idx=0; idx<allowables.length; idx++ ) {
+                   
+                   square = allowables[idx];
+                   canv = document.getElementById("square"+square.getX()+","+square.getY());
+                   sq="new Square("+square.getX()+","+square.getY()+")";
+                   
+                   if ( rendr ) {
+                       str = "movePieceTo("+pstring+","+sq+");";
+                       //alert( str );
+                       canv.setAttribute("onclick",str);
+                   }
+                   else {
+                       canv.setAttribute("onclick","");
+                   }
+                   
+                   this.renderChoice(p, rendr, canv);
+                  
+               }
+               
+               
+               
+           }
+           
+           //  render a piece ( as well as clear square ( for moving piece )
+           function renderChoice( piece, rendr, canv ) {
+                   
+                ctx = canv.getContext("2d");
+                
+                if ( rendr ) {
+                
+                    ctx.fillStyle=piece.getPlayer().colorcode;
+                    ctx.beginPath();
+                    ctx.arc(boardSquareSize/2,boardSquareSize/2,boardSquareSize/8,0,2*Math.PI);
+                    ctx.fill();
+                    
+                }
+                else {
+                    
+                    ctx.clearRect(0,0,boardSquareSize,boardSquareSize);      
+                    
+                }
+        
+    
+           }
+           // first move -->  set onclick for each piece to display alwabl mvs
+           function firstMove() {
+               
+               for ( var colr in KColors ) {
+                   
+                   /*Piece*/ p = new Piece( Player.WHITE, KColors[colr ] );
+                   /*Square*/ sq = board.getSquarePieceIsOn(p);
+                   
+                   pstring = "new Piece(Player.WHITE,KColors."+colr+")";
+                   
+                   canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+                   canv.setAttribute("onclick","showFirstMvs("+pstring+");");
+                   
+               }
+               
+           }
+           
+           // remove previous muvs and render new moves...
+           function showFirstMvs( /*Piece*/ p ) {
+               
+               if ( previousPieceSelected !== null ) {    
+                   this.showMvs( previousPieceSelected, false );   
+               }
+               this.showMvs( p, true );
+               
+               previousPieceSelected = p;
+               
+           }
+           // move piece p to square sq ( called from avlblmvs canvas
+           function movePieceTo( /*Piece*/ p, /*Sqaure*/sq ) {
+               
+               this.showMvs( p, false );  // clear alwblmoves
+               
+               currSq = board.getSquarePieceIsOn(p);
+               
+               // clear current square
+               canv = document.getElementById("square"+currSq.getX()+","+currSq.getY());
+               ctx = canv.getContext("2d");
+               alert("clear moved piece...");
+               ctx.clearRect(0,0,boardSquareSize,boardSquareSize);  
+               
+               //update model
+               board.move( p, sq );
+               
+               //render new piece location...
+               canv = document.getElementById("square"+sq.getX()+","+sq.getY());
+               renderPiece( canv, p );
+               
+               //send move message to opponents browser...    
+               move = { type:"move",
+                        piece: p,
+                        to:sq };
+               
+               movemsg = JSON.stringify( move );
+               ws.send( movemsg );
+               
+               // Check for WIN condition...
+               if ( sq.getY()==7 ) {
+                   
+                   alert("WHITE WINS!");
+                   stop();
+                   
+               }
+               else if ( sq.getY()==0 ) {
+                   
+                   alert("BLACK WINS");
+                   stop();
+                   
+               }
+               
+//          
+//               if ( previousPieceSelected !== null ) {
+//                   
+//                   for ( x=0; x<8; x++ ) {
+//                       canv = document.getElementById("square"+x+",0");
+//                       canv.setAttribute("onclick","");
+//                    }
+//               
+//                }
+//               
+//               nxtPlyr = p.getPlayer()===Player.WHITE?Player.BLACK:Player.WHITE;
+//               colr = board.getSquareColor(sq);
+//               
+//               /* Piece */ p = new Piece( nxtPlyr, colr );
+//               
+//               // show moves for next player and color ( will also set onclick mv for each mv )
+//               this.showMvs( p, true );
+           }
+    
+          function stop() {
+              
+              for ( x=0; x<8; x++ ) {
+                  for ( y=0; y<8; y++ ) {
+                      
+                      canv = document.getElementById("square"+x+","+y);
+                      canv.setAttribute("onclick","");                    
+                      
+                  }
+              }
+          }
+        
+
+ 
+</script>
+
+    </head>
+    <body onload="onLoad();">
+        <div id="board"></div>
+        
+        Nickname:<input type="text" id="nick" value="nickname">
+        <button type="button" onclick="alert(document.getElementById('nick').value);">Login</button><br>
+        
+        Chat Message:<input type="text" id="chatmessage">
+        <button type="button" onclick="sendChatMessage(document.getElementById('chatmessage').value);">Send Chat Message</button><br>
+        
+        <textarea  id="chattext" rows="15" cols="56">WELCOME TO WEB KAMISADO!</textarea>
+    </body>
+</html>

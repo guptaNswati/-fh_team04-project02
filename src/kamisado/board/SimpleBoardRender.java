@@ -117,7 +117,7 @@ public class SimpleBoardRender {
 		}
 		
 		System.out.println(p.getPlayer().name() + " wins!");
-	
+		sc.close();
 	}
 
 }
