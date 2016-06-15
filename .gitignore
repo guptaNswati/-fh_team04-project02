@@ -27,6 +27,7 @@
 
 # ignore project files
 .settings
+.classpath
 
 # ignore temporary editor files
 *~
