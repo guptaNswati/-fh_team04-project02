@@ -55,5 +55,7 @@ dist/
 			to run ).  Am in the midst of using webapp-runner.jar to
 			test deployment ( with the goal of deploying onto the web (
 			like heroku ).	
+			
+FurtherDesignIdeas.txt  Some ideas about next steps / additonal functionality for this project.
 
    
