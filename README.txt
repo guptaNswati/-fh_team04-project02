@@ -29,7 +29,7 @@ Other associated files:
 web/js folder:
 
    board.js		A ported version of the BoardImpl.java Board implementation.
-   enuns.js		Enumerations for Color and Player ( as in the above java			implemention )
+   enuns.js		Enumerations for Color and Player ( as in the above java implemention )
    piece.js		A js style object ( using prototype keyword ).
    square.js		Similar to the Square object in the java implementation.
 
@@ -50,5 +50,7 @@ dist/
 			to run ).  Am in the midst of using webapp-runner.jar to
 			test deployment ( with the goal of deploying onto the web (
 			like heroku ).	
+			
+FurtherDesignIdeas.txt  Some ideas about next steps / additonal functionality for this project.
 
    
