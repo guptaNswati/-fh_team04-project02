@@ -5,11 +5,14 @@ import javax.swing.JLabel;
 public class BoardPieces {
 	public JLabel[] blackPieces;
     public JLabel[] whitePieces;
-    
+    public JLabel allowable;
     BoardPieces()
     {
     	blackPieces = new JLabel [8];
     	whitePieces = new JLabel [8];
+    	
+    	ImageIcon highlight = new ImageIcon(new ImageIcon("Pieces/Allowable.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
+    	allowable = new JLabel(null, highlight, JLabel.CENTER);
     	
     	ImageIcon BlackOrange = new ImageIcon(new ImageIcon("Pieces/BlackOrange.png").getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
     	blackPieces[0] = new JLabel(null, BlackOrange, JLabel.CENTER);
