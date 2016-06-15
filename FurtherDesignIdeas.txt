@@ -1,0 +1,11 @@
+Further Design ideas
+
+1)  Create Game class that can have pluggable Players
+   a) create a Player for a shared GUI
+   b) create a Player for individual Kamisado boards
+   c) create a BOT player ( note:  can be set to have BOT vs BOT )
+   d) integrate with web version so we can have a java GUI for one player and
+      a HTML5/Javascript GUI for the other player.
+      
+2)  Integrate additions as above with the splash page ( to create and set 
+    the pluggable Players depending on the users settings ).
