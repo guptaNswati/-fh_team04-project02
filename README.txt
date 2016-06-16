@@ -57,5 +57,8 @@ dist/
 			like heroku ).	
 			
 FurtherDesignIdeas.txt  Some ideas about next steps / additonal functionality for this project.
+PluggablePlayerSequennceDiagram.pdf
+			Diagram illustrating general flow of Kamisado game and also showing
+			PluggablePlayer concept.
 
    
