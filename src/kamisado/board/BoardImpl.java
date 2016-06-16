@@ -312,25 +312,32 @@ public class BoardImpl implements Board {
 		Square moveTo = null;
 		boolean won = false;
 		Random randomGenerator = new Random();
+		int random = 0;
+		List <Square> allowableMoves = getAllowableMoves(p);
 		List <Square> safeMoves = new ArrayList<Square>();
 		System.out.println("initiate!");
-		for (int i = 0; i < getAllowableMoves(p).size(); i++){
-			if ((getAllowableMoves(p).get(i).getY() == 0) || (getAllowableMoves(p).get(i).getY() == 7)){
-				moveTo = getAllowableMoves(p).get(i);
+		for (int i = 0; i < allowableMoves.size(); i++){
+			if ((allowableMoves.get(i).getY() == 0) || (allowableMoves.get(i).getY() == 7)){
+				moveTo = allowableMoves.get(i);
 			}
 		}
 
 		System.out.println("not a winner!");
 		if (moveTo == null){
 			System.out.println("moveTo null");
-			for (int i = 0; i < getAllowableMoves(p).size(); i++){
-				if (lookAhead(p, getAllowableMoves(p).get(i))){
-					safeMoves.add(getAllowableMoves(p).get(i));
+			for (int i = 0; i < allowableMoves.size(); i++){
+				if (lookAhead(p, allowableMoves.get(i))){
+					safeMoves.add(allowableMoves.get(i));
 				}
 			}
-			
-			int random = randomGenerator.nextInt(safeMoves.size());
-			moveTo = safeMoves.get(random);
+			if (safeMoves.size() != 0){
+				random = randomGenerator.nextInt(safeMoves.size());
+				moveTo = safeMoves.get(random);
+			}
+			else {
+				random = randomGenerator.nextInt(allowableMoves.size());
+				moveTo = allowableMoves.get(random);
+			}
 		}
 		System.out.println("done!");
 		won = move(p, moveTo);

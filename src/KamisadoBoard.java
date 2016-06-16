@@ -3,11 +3,14 @@ import java.awt.Image;
 import kamisado.board.*;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -20,8 +23,8 @@ public class KamisadoBoard implements MouseListener
 	   private KBoard board;
 	   private BoardImpl model;
 	   private Piece p;
-	   private boolean gameStarted;
-	   
+	   private boolean gameStarted, gameOver, singlePlayer, blockedByComputer;
+	   private static final JButton singlePlayerButton = new JButton("singlePlayer");
 	   public KamisadoBoard()
 	   {
 		  frame = new JFrame("Kamisado");
@@ -30,7 +33,11 @@ public class KamisadoBoard implements MouseListener
 		  model = new BoardImpl();
 		  //p = model.getPieceOnSquare(0,0);
 		  gameStarted = false;
-	      
+		  gameOver = false;
+	      singlePlayer = false;
+	      blockedByComputer = false;
+	      singlePlayerButton.addActionListener(new SinglePlayer());
+	      panel.add(singlePlayerButton);
 		  panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		  
 		  for (int x=0; x < 8; x++)
@@ -124,19 +131,23 @@ public static void main(String[] args)
 public void mouseReleased(MouseEvent e) {
 	int x,y;
 	PanelSquare clicked = (PanelSquare)e.getSource();
-	
+	List <Square> allowable;
 	x = clicked.getXX();
 	y = clicked.getYY();
 	Square s = new Square (y,x);
-	
+	Player nextPlayer;
+	Color c;
+	PanelSquare allowablePanel;
+	Square from;
+	PanelSquare fromPS;
 	System.out.println(s);
+	JLabel movedPiece;
 	
 	if (!gameStarted){
 		if (x == 0 || x == 7){
 			p = model.getPieceOnSquare(s);
 			System.out.println(p);
-			List <Square> allowable = model.getAllowableMoves(p);
-			PanelSquare allowablePanel;
+			allowable = model.getAllowableMoves(p);
 			
 			for ( Square as: allowable){
 				allowablePanel = board.panelSquares[as.getY()][as.getX()];
@@ -152,45 +163,137 @@ public void mouseReleased(MouseEvent e) {
 		return;
 	}
 	
-	
-	if (!model.isValidMove(p, s)){
+	if (!blockedByComputer){
+	//checking that the move is valid and that the game is not over
+	if (!model.isValidMove(p, s) || gameOver){
 		return;
 	}
+	
+	//clearing old possible moves display
+	allowable = model.getAllowableMoves(p);
+			
+	for ( Square as: allowable){
+		allowablePanel = board.panelSquares[as.getY()][as.getX()];
+		    	
+		allowablePanel.remove(0);
+		allowablePanel.repaint();
+	}
+	
+	from = model.getSquarePieceIsOn(p);
+	gameOver = model.move(p, s);
 		
-	Square from = model.getSquarePieceIsOn(p);
-	model.move(p, s);
-	
-	
 	System.out.println( from );
 	
-	PanelSquare fromPS = board.panelSquares[from.getY()][from.getX()];
+	fromPS = board.panelSquares[from.getY()][from.getX()];
 	
-	JLabel l = fromPS.getLabel();
+	movedPiece = fromPS.getLabel();
 	
 	fromPS.remove(0);
 	fromPS.repaint();
 	
-	clicked.setLabel( l );
+	clicked.setLabel(movedPiece);
 	clicked.repaint();
 	
-	Player nextPlayer = p.getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
-	Color c = model.getSquareColor(s);
+	if (gameOver){
+		return;
+	}
 	
+	//switching p to the next player's piece
+	nextPlayer = p.getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
+	c = model.getSquareColor(s);
 	p = new Piece(nextPlayer,c);
-	/*
-	gameRules.getAllowableMoorves((Piece)e.getSource());
-	PanelSquare ps = (PanelSquare) e.getSource();
-	System.out.println(" ps " + ps.getXX() + ", " + ps.getYY());
+	}
 	
-	PanelSquare ps1 = board.panelSquares[1][0];
-	ps1.setLabel(board.pieces.blackPieces[0]);
-//	ps1.repaint();
 	
-	PanelSquare ps2 = board.panelSquares[0][0];
-	ps2.setLabel(new JLabel());
-//	ps2.repaint();
- * 
- */
+	if (!singlePlayer){	
+		allowable = model.getAllowableMoves(p);
+		//in case of blocked piece, switch p again to the other player
+		if (allowable.size() == 0){
+			nextPlayer = p.getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
+			c = model.getSquareColor(model.getSquarePieceIsOn(p));
+			p = new Piece(nextPlayer,c);
+			allowable = model.getAllowableMoves(p);
+		}
+		
+			for ( Square as: allowable){
+				allowablePanel = board.panelSquares[as.getY()][as.getX()];
+				JLabel highlight = new JLabel(null,new ImageIcon(new ImageIcon("Pieces/Allowable.png").getImage().
+						getScaledInstance(45, 45, Image.SCALE_DEFAULT)), JLabel.CENTER);
+				allowablePanel.setLabel(highlight);
+			}
+		}
+	
+	else{
+		allowable = model.getAllowableMoves(p);
+		//in case of blocked piece, switch p again to the other player
+		if (allowable.size() == 0){
+			nextPlayer = p.getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
+			c = model.getSquareColor(model.getSquarePieceIsOn(p));
+			p = new Piece(nextPlayer,c);
+			allowable = model.getAllowableMoves(p);
+
+			for ( Square as: allowable){
+				allowablePanel = board.panelSquares[as.getY()][as.getX()];
+				JLabel highlight = new JLabel(null,new ImageIcon(new ImageIcon("Pieces/Allowable.png").getImage().
+						getScaledInstance(45, 45, Image.SCALE_DEFAULT)), JLabel.CENTER);
+				allowablePanel.setLabel(highlight);
+			}
+
+			return;
+		}
+		
+		from = model.getSquarePieceIsOn(p);
+
+		gameOver = model.computerMove(p);
+		
+		Square next = model.getSquarePieceIsOn(p);
+		fromPS = board.panelSquares[from.getY()][from.getX()];
+		movedPiece = fromPS.getLabel();
+		fromPS.remove(0);
+		fromPS.repaint();
+		clicked = board.panelSquares[next.getY()][next.getX()];
+		clicked.setLabel(movedPiece);
+		clicked.repaint();
+		
+
+		if (!gameOver){
+			
+			nextPlayer = p.getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
+			c = model.getSquareColor(next);
+			p = new Piece(nextPlayer,c);
+			allowable = model.getAllowableMoves(p);
+			
+			if (allowable.size() != 0){
+				blockedByComputer = false;
+				for ( Square as: allowable){
+					allowablePanel = board.panelSquares[as.getY()][as.getX()];
+					JLabel highlight = new JLabel(null,new ImageIcon(new ImageIcon("Pieces/Allowable.png").getImage().
+							getScaledInstance(45, 45, Image.SCALE_DEFAULT)), JLabel.CENTER);
+					allowablePanel.setLabel(highlight);
+				}
+			}
+			
+			else {
+				blockedByComputer = true;
+				nextPlayer = p.getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
+				c = model.getSquareColor(model.getSquarePieceIsOn(p));
+				p = new Piece(nextPlayer,c);
+				allowable = model.getAllowableMoves(p);
+				
+				for ( Square as: allowable){
+					allowablePanel = board.panelSquares[as.getY()][as.getX()];
+					JLabel highlight = new JLabel(null,new ImageIcon(new ImageIcon("Pieces/Allowable.png").getImage().
+							getScaledInstance(45, 45, Image.SCALE_DEFAULT)), JLabel.CENTER);
+					allowablePanel.setLabel(highlight);
+				}
+
+			}
+		}
+	}
+}
+
+private void recursiveFunction() {
+	// TODO Auto-generated method stub
 	
 }
 
@@ -217,6 +320,21 @@ public void mouseExited(MouseEvent e) {
 	// TODO Auto-generated method stub
 	
 }
+
+class SinglePlayer implements ActionListener
+{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(!singlePlayer){
+			singlePlayer = true;
+		}
+		else {
+			singlePlayer = false;
+		}
+	}
+
+	}
 }
 
 /*
