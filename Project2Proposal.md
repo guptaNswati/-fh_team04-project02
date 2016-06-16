@@ -150,6 +150,4 @@ Deliverables include:
 | Building board model and simple view of an initialized board ( with pieces ) | May 26, 2016 |
 | Basic functionality to move a piece and logic to validate the users move  | June 2, 2016 |
 | Functionality to show users possible moves ( higlighting ), if possible, develope AI and look-ahead engine | June 9, 2016] |
-|  |  |
-| ...                        | [expected date] |
 | Demonstration and Delivery | June 16, 2016    |
