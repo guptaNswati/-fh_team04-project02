@@ -60,5 +60,12 @@ public interface Board {
 	 * prints simple text version to System.out
 	 */
 	public void render();
+
 	
+	public boolean checkWinCondition(Piece p, Square s);
+	
+	public boolean computerMove(Piece p);
+	
+	public boolean lookAhead(Piece p, Square s);
 }
+

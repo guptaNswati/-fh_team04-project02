@@ -1,4 +1,5 @@
 package kamisado.board;
+
 /**
  * 
  * @author chris
@@ -17,8 +18,7 @@ public class Square {
 		setY(y);
 		
 	}
-	
-	//***
+
 	
 	public int getX() {
 		return x;
@@ -46,4 +46,9 @@ public class Square {
 		return "("+x+","+y+")";
 	}
 	
+
+	
 }
+
+
+
