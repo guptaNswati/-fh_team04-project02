@@ -31,6 +31,8 @@ public class PanelSquare extends JPanel{
 		if ( this.getComponentCount()!=0) 
 			{ this.remove(0);}
 		this.add(label);
+		this.revalidate();
+		this.repaint();
 	}
 	public int getXX() {
 		return xx;
