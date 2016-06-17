@@ -1,3 +1,5 @@
+//This code is not connected to the main menu and does not include colorBline mode
+
 import java.awt.Dimension;
 import java.awt.Image;
 import kamisado.board.*;
@@ -192,7 +194,6 @@ public void mouseReleased(MouseEvent e) {
 	fromPS.repaint();
 	
 	clicked.setLabel(movedPiece);
-	clicked.repaint();
 	
 	if (gameOver){
 		return;
