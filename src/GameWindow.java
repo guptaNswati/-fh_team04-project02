@@ -45,8 +45,8 @@ public class GameWindow implements MouseListener
 		singlePlayer = false;
 		blockedByComputer = false;
 		colorBlind = false;
-		singlePlayerButton.addActionListener(new SinglePlayer());
-		panel.add(singlePlayerButton);
+		//singlePlayerButton.addActionListener(new SinglePlayer());
+		//panel.add(singlePlayerButton);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		for (int x=0; x < 8; x++)
