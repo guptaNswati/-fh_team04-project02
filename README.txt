@@ -1,5 +1,7 @@
 README.txt		Text file containing inforation abouut this project ( CS40A Team04 Project 2 )
 
+Project2Proposal        Our Project Two Proposal
+
 Board Interface and Implementation ( plus other associated files ):
 
 kamisado.board package:
@@ -62,5 +64,11 @@ FurtherDesignIdeas.txt  Some ideas about next steps / additonal functionality fo
 PluggablePlayerSequennceDiagram.pdf
 			Diagram illustrating general flow of Kamisado game and also showing
 			PluggablePlayer concept.
+
+Demonstration files:
+
+   KDemoTwoPlayerTwoBrowser.mov		.mov file showing the functionality of the two browser web version. 
+   KDemoTwoPlayerOneBrowser.mov		.mov file showing the functionality of the one browser version ( standalone version ).
+   KamisadoRecording.avi		.avi file showing functionality of the Swing GUI version of Kamisado.
 
    
