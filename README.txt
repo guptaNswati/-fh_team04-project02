@@ -36,6 +36,9 @@ kamisado default package (GUI components)
    Colors.java		A class that sets the colors for the squares on the board
    GameWindow.java	A class that displays the game board and pieces on the screen and 
    			allows users to play the game
+   GameWindowCommented.java 
+			A version of the source file GameWindow.java but with added high-level comments
+
    KamisadoBoard.java	An older version of GameWindow.java
    KBoard.java		A class that sets the pieces on the board
    Main Menu.java	A class that loads up the main menu when run
