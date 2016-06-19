@@ -1,4 +1,4 @@
-README.txt
+README.txt		Text file containing inforation abouut this project ( CS40A Team04 Project 2 )
 
 Board Interface and Implementation ( plus other associated files ):
 
@@ -16,6 +16,8 @@ kamisado.board package:
 			Kamisado board ( for location items on a board
 			like an available move and Piece location.
 
+* websocket endpoint and associated classes
+
 kamisado.websocket.server package:
 
    KamisadoSessionPair.java	A class that holds the Session information
@@ -24,7 +26,7 @@ kamisado.websocket.server package:
    WebSocketServer.java		A Websocket endpoint that manages messages
 				passed to and from the KAMISADO.html webpage.
 
-Other associated files:
+*  Other associated files ( used in web version )
 
 web/js folder:
 
@@ -43,14 +45,22 @@ web folder:
    simpleWebSocketTest	A test I used to test functionality of a chat using
 			websockets.
    testBoardColors.html A prototype of the KAMISADO.html webpage.
+   
+web archives ( deployable ) : Please use the KamisadoClient.war file
 
-dist/
-
+   Kamisado.war		.war file that can run the web version of our KAMISADO board game.
+			Have tested in tomat 8.0.35 ( placed in the webapss folder )
+			
    KamisadoClient.war   A java web archive file ( to drop into a container ( server )
 			to run ).  Am in the midst of using webapp-runner.jar to
 			test deployment ( with the goal of deploying onto the web (
-			like heroku ).	
+			like heroku ).
+			
+other files of interest:
 			
 FurtherDesignIdeas.txt  Some ideas about next steps / additonal functionality for this project.
+PluggablePlayerSequennceDiagram.pdf
+			Diagram illustrating general flow of Kamisado game and also showing
+			PluggablePlayer concept.
 
    

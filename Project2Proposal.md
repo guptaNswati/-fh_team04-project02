@@ -4,9 +4,9 @@
 
 __Team Composition:__<br>
 
-Christopher Barbee,  Christopher , Matt
+Christopher Barbee,  Christopher Dunleavy , Hanyu Chen (Matt), Swati Gupta
 
-May 19th, 2016
+June 16, 2016
 
 ---
 
@@ -42,6 +42,9 @@ The game will be playable by two players locally on one machine. The user will s
 
 Additionally, the teams aims to include a computer player so that one player may still play the game. Due to the simple rules and the fact that only one piece is able to move each turn, a simple AI player should not be difficult to implement.
 
+Also,  web version of the Game will be made.  Two players ( with internet access ) will goto Kamisado game webpage.  When both player have connedted to the Kamisado Game server the game will begin with the white plaayer moving first.  The users moves will be reflected on both the players browsers. Additionally the users can send chat messages ( trash talk ? ) to eachother.  When there is a winner,  both players will be notified.  Idealy this version will be deployable to the web ( like Heroku and other JEE hosting sites on the web ).
+
+The local version will have a color-blind-mode that will allow color-blind users to use/play this Kamisado game.
 
 ### 1.2.	Target Customer [important part]
 
@@ -68,7 +71,7 @@ There will be an option for a single player to play against a computer opponent.
 
 ###2.1.	Team profile
 * Chris Dunleavy - proficient in Java, has some experience with JavaScript, HTML, CSS, and SQL
-* Chris Barbee - Have some professional experience in Java ( Hibernate, soem RESTful web services, soem jsp, some UML ( Class Diagram and Sequence Diagrams ). Some javascript ( including JSON, and HTTPRequest ). I enjoy the design phase ( making UML diagrams for instance )
+* Chris Barbee - Some professional experience in Java ( Hibernate, some RESTful web services, some jsp, some UML ( Class Diagram and Sequence Diagrams ). Some javascript ( including JSON, and HTTPRequest ). I enjoy the design phase ( making UML diagrams for instance )
 * Hanyu Chen - Good at using Java and taking CS1C now in Foothill College. Although technically I don't have much experience in Java, but I will try my best to learn and help my team.
 
 ### 2.1.	Challenges
@@ -76,6 +79,7 @@ There will be an option for a single player to play against a computer opponent.
 * Time constraints -- 4 weeks ,  4 sprints.
 * Getting up to speed with Java Swing and J2D(basically is making model of board and game pieces, also need to learn how to drag and drop pieces. 
 * Designing a computer component with AI
+* porting Kamisad model ( in java ) to javscript ( for the web version ).
 
 [Provide a ***description of challenges*** that your group might face. These are often technical and non-technical aspects that may not be apparent to the reader.]
 
@@ -83,16 +87,17 @@ For example, if you were creating a software system for a dental office to manag
 
 ### 2.2.	Assumptions and Constraints
 [Under what assumptions and constraints will the team adhere to?]
-
 [**List any specific assumptions on which the project is based on and imposed constraints** that your team will be working under. Non-technical constraints could be: such as schedule and budget. Technical constraints may be design or implementation metholodogies, tools, operating system(s), hardware or software constraints.
 
 * Non-Technical Constraints:
   * Users have a general understanding of how to user computers ( mouse / keyboard / GUI )
   * We only have 4 weeks to complet this proect
   * Manpower is not as good as other groups.  
+  * Users have the ability to diferentiate betweeen different colored squares ( for no-color-blind version )
 * Techinical Constraints:
   *  Assuming the user(s) has a version on Java VM with Swing and Java2D libraries.
   *  Assuming the user(s) have a reasonably recent computer that can run a version of JRE ( with J2D and Swing set )
+  *  Assuming users have access to the web and an HTML5 compliant browser.
 
 ---
 
@@ -108,11 +113,14 @@ Deliverables include:
 *	Software System Project Proposal.
 *	Preliminary design docs ( interfaces )
 *	Class Diagram and Sequence diagrams
-*	CRC Cards
-*	[user manual and installation instructions]
+*	README.txt list of files submitted for instrutor review
 *	Presenations
 *	javadoc
 *	java code
+*	HTML pages
+*	Javascript code
+*	Other associate files like .png images for board pieces and marking allowable moves.
+*	Short movies demonstrating current functionality ( both fof the Swing GUI version and the web version ).
 *	[This list may include product deployment activities that are necessary for the successful use of the system your team develops.]
 
  *<sup><a name="footnote_4">4</a></sup>Note: This list may be modified over the weeks until the final submission.* 
@@ -142,6 +150,4 @@ Deliverables include:
 | Building board model and simple view of an initialized board ( with pieces ) | May 26, 2016 |
 | Basic functionality to move a piece and logic to validate the users move  | June 2, 2016 |
 | Functionality to show users possible moves ( higlighting ), if possible, develope AI and look-ahead engine | June 9, 2016] |
-|  |  |
-| ...                        | [expected date] |
 | Demonstration and Delivery | June 16, 2016    |

@@ -53,7 +53,7 @@ and open the template in the editor.
                
                brd = document.getElementById("board");
 
-               alert("shoeBoard ...");
+               //alert("shoeBoard ...");
 
                for ( y=0; y < 8; y++ ) {
                    
@@ -197,6 +197,8 @@ and open the template in the editor.
                //update model
                board.move( p, sq );
                
+               //alert("move to square("+sq.getX()+","+sq.getY()+")");
+               
                //render new piece location...
                canv = document.getElementById("square"+sq.getX()+","+sq.getY());
                this.renderPiece( canv, p );
@@ -209,6 +211,13 @@ and open the template in the editor.
                     }
                
                 }
+                
+                // Check WIN condition ...
+                
+                if ( sq.getY()==0 || sq.getY()==7) { 
+                    alert(""+p.getPlayer().name+" wins!");
+                    return;
+                }
                
                nxtPlyr = p.getPlayer()===Player.WHITE?Player.BLACK:Player.WHITE;
                colr = board.getSquareColor(sq);
@@ -218,7 +227,6 @@ and open the template in the editor.
                // show moves for next player and color ( will also set onclick mv for each mv )
                this.showMvs( p, true );
            }
-    
           
         </script>
     </head>

@@ -1,6 +1,6 @@
 Options for seeing a working version of our web version of Kamisado:
 
-  (1)  Deploy into a compliant java app server ( like glassfish and tomcat ). For tomcat, deploy the Kamisado.war file into the webapps folder and startup the server.  Tomcat will then locate and expand the .war file setting up the Kamisado webapp ( I have tested this with apache tomcat 8.0.35 ).  Also have a version working inside NetBeans IDE.
+  (1)  Deploy KamisadoClient.war into a compliant java app server ( like glassfish and tomcat ). For tomcat, deploy the Kamisado.war file into the webapps folder and startup the server.  Tomcat will then locate and expand the .war file setting up the Kamisado webapp ( I have tested this with apache tomcat 8.0.35 ).  Also have a version working inside NetBeans IDE.
 
   (2) Use webapp-runner.jar and the KamisadoClient.war file ( ** )
 
@@ -10,7 +10,7 @@ Options for seeing a working version of our web version of Kamisado:
 
 *  After “deploying” ( for instance in tomcat webapps folder ) point 2 browser windows/ ‘ tabs to:
 
-   http://localhost:8080/Kamisado/KAMISADO.html
+   http://localhost:8080/KamisadoClient/KAMISADO.html
 
   In the textarea of each browser window/tab ( below the board ) there will be a line indicating the Player’s color ( WHITE / BLACK ).  In this version,  WHITE moves first by first clicking on the piece he/she wants to move and then clicking on an allowable move shown by squares with dots in their centers.  Players move alternately until one of the players pieces is on the opposite side of the board which is the “winning condition”.
 
