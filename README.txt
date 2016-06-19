@@ -20,7 +20,13 @@ kamisado.board package:
 			Kamisado board ( for location items on a board
 			like an available move and Piece location.
 
-* websocket endpoint and associated classes
+kamisado.websocket.server package:
+
+   KamisadoSessionPair.java	A class that holds the Session information
+				for pair of Kamisado players ( stored in a
+				static Map in the WebSocketServer ).
+   WebSocketServer.java		A Websocket endpoint that manages messages between the 
+   				two players browsers
 
 kamisado default package (GUI components)
    BoardPieces.java	A class that loads the piece images into JLabels
@@ -33,18 +39,12 @@ kamisado default package (GUI components)
    PanelSquare.java	A class that extends JPanel by gibing it an x and y game board coordinate
    Symbols.ja		A class that loads the colorbline mode symbols into JLabels
 
-kamisado.websocket.server package:
-
-   KamisadoSessionPair.java	A class that holds the Session information
-				for pair of Kamisado players ( stored in a
-				static Map in the WebSocketServer ).
-   WebSocketServer.java		A Websocket endpoint that manages messages
 				passed to and from the KAMISADO.html webpage.
 
-*  Other associated files ( used in web version )
+Other associated files ( used in web version )
 
 Symbols folder/Images folder/Pieces folder
-			Resources containing image files for the game
+			Resources containing image files for the Swing GUI version of our Kamisado game
 
 web/js folder:
 
@@ -62,7 +62,8 @@ web folder:
 			other ( trash talk ? )
    simpleWebSocketTest	A test I used to test functionality of a chat using
 			websockets.
-   testBoardColors.html A prototype of the KAMISADO.html webpage.
+   testBoardColors.html A prototype of the KAMISADO.html webpage ( two player
+   			one browser implementation ).
    
 web archives ( deployable ) : Please use the KamisadoClient.war file
 
@@ -73,6 +74,8 @@ web archives ( deployable ) : Please use the KamisadoClient.war file
 			to run ).  Am in the midst of using webapp-runner.jar to
 			test deployment ( with the goal of deploying onto the web (
 			like heroku ).
+			
+   Kamisado.jar		Executable jar file ( java -jar Kamisado.jar to run )
 			
 other files of interest:
 			
