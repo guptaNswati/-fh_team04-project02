@@ -14,11 +14,24 @@ kamisado.board package:
 			containing both Color and Player components.
    Player.java		An Enumeration of the two player ( colors )
 			(WHITE and BLACK )
+   SimpleBoardRender.java
+   			A playable console-based version of the game.
    Square.java		A helper class representing a position on a
 			Kamisado board ( for location items on a board
 			like an available move and Piece location.
 
 * websocket endpoint and associated classes
+
+kamisado default package (GUI components)
+   BoardPieces.java	A class that loads the piece images into JLabels
+   Colors.java		A class that sets the colors for the squares on the board
+   GameWindow.java	A class that displays the game board and pieces on the screen and 
+   			allows users to play the game
+   KamisadoBoard.java	An older version of GameWindow.java
+   KBoard.java		A class that sets the pieces on the board
+   Main Menu.java	A class that loads up the main menu when run
+   PanelSquare.java	A class that extends JPanel by gibing it an x and y game board coordinate
+   Symbols.ja		A class that loads the colorbline mode symbols into JLabels
 
 kamisado.websocket.server package:
 
@@ -29,6 +42,9 @@ kamisado.websocket.server package:
 				passed to and from the KAMISADO.html webpage.
 
 *  Other associated files ( used in web version )
+
+Symbols folder/Images folder/Pieces folder
+			Resources containing image files for the game
 
 web/js folder:
 
