@@ -39,7 +39,7 @@ The game will be playable by two players locally on one machine. The user will s
 
 Additionally, there will be a single-player mode available, in which one player can play against a computer opponent.
 
-Also, a web version of the Game will be made.  Two players ( with internet access ) will go to the Kamisado game webpage.  When both players have connedted to the Kamisado Game server the game will begin with the white player moving first.  The users moves will be reflected on both the players browsers. Additionally the users can send chat messages ( trash talk ? ) to each other.  When there is a winner,  both players will be notified.  Idealy this version will be deployable to the web ( like Heroku and other JEE hosting sites on the web ).
+Also, a web version of the Game will be made.  Two players ( with internet access ) will go to the Kamisado game webpage.  When both players have connected to the Kamisado Game server the game will begin with the white player moving first.  The users moves will be reflected on both the players browsers. Additionally the users can send chat messages ( trash talk ? ) to each other.  When there is a winner,  both players will be notified.  Idealy this version will be deployable to the web ( like Heroku and other JEE hosting sites on the web ).  Additionally,  a single page html5/javascript version will be avaialble.
 
 The local version will have a color-blind-mode that will allow color-blind users to use/play this Kamisado game.
 
