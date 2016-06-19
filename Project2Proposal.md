@@ -12,21 +12,18 @@ June 16, 2016
 
 ####Table of Contents####
 
-[*This page enables the reader to quickly find relevant parts of the document. Including titles and page numbers of each section.
-Note: The page numbers are for example only. Change these as you see fit.*]
-
 * 1 Project Overview 
-  * 1.1 Abstract…………………………………….………………………Pg 3
-  * 1.2 Target Customer……………….…………………………………Pg 4
-  * 1.3 Search Words……………….……………………………………Pg 4
-  * 1.4 Scope and Objectives….…………………………………………Pg 4, 5
+  * 1.1 Abstract…………………………………….………………………Pg 2
+  * 1.2 Target Customer……………….…………………………………Pg 2
+  * 1.3 Search Words……………….……………………………………Pg 2
+  * 1.4 Scope and Objectives….…………………………………………Pg 2, 3
 * 2 Team and Constraints
-  * 2.1 Team Profile…….……………………………………………….…Pg 6
-  * 2.2 Challenges……….……………………………………………….Pg 7
-  * 2.3 Assumptions and Constraints………………………………....Pg 7
+  * 2.1 Team Profile…….……………………………………………….…Pg 3
+  * 2.2 Challenges……….……………………………………………….Pg 3
+  * 2.3 Assumptions and Constraints………………………………....Pg 3,4
 * 3 Deliverables and Milestones
- * 3.1 Project Deliverables……………………………………………..Pg 8
- * 3.2 Schedule and Budget Summary…..…………………………..Pg 9
+ * 3.1 Project Deliverables……………………………………………..Pg 4
+ * 3.2 Schedule and Budget Summary…..…………………………..Pg 4,5
 
 
 ---
@@ -36,13 +33,13 @@ Note: The page numbers are for example only. Change these as you see fit.*]
 
 The purpose of this project is to develop a Java implementation of the board game Kamisado. Kamisado is a two-player game that was released in 2008, and it takes about ten minutes to play. One player controls eight black pieces, and the other player controls eight white pieces. The board is an 8x8 area comprised of colored squares. Each of the players' eight pieces is marked with a different color corresponding to the colors on the board. Each piece can move forward or diagonally-forward as many spaces as possible without crossing through occupied spaces, but the player doesn't get to choose which piece he moves – the piece he must move is the piece whose color matches that of the space that his opponent landed on last turn. The first player to move one of his pieces to the opposite end of the board wins the game. 
 
-The software will be written in Java, using Swing for the GUI. Java2D may be used for graphics, but it may be easier to design the graphics in an external program like Photoshop or GIMP and use them in Swing.
+The software will be written in Java, using Swing for the GUI. Graphics for the pieces will be drawn in Paint.NET.
 
-The game will be playable by two players locally on one machine. The user will start up the program, start a two player game, and play along with a friend. Each player will take turns using the mouse to move their pieces. The spaces available for them to move their piece to will be highlighted, and if the user hovers over an available space, the opponent's piece that will move on the next turn will be highlighted. The game will automatically end when the win condition for one player is met, and the game can be reset at any time.
+The game will be playable by two players locally on one machine. The user will start up the program, start a two player game, and play along with a friend. Each player will take turns using the mouse to move their pieces. The spaces available for them to move their piece to will be highlighted. The game will automatically end when the win condition for one player is met.
 
-Additionally, the teams aims to include a computer player so that one player may still play the game. Due to the simple rules and the fact that only one piece is able to move each turn, a simple AI player should not be difficult to implement.
+Additionally, there will be a single-player mode available, in which one player can play against a computer opponent.
 
-Also,  web version of the Game will be made.  Two players ( with internet access ) will goto Kamisado game webpage.  When both player have connedted to the Kamisado Game server the game will begin with the white plaayer moving first.  The users moves will be reflected on both the players browsers. Additionally the users can send chat messages ( trash talk ? ) to eachother.  When there is a winner,  both players will be notified.  Idealy this version will be deployable to the web ( like Heroku and other JEE hosting sites on the web ).
+Also, a web version of the Game will be made.  Two players ( with internet access ) will go to the Kamisado game webpage.  When both players have connedted to the Kamisado Game server the game will begin with the white player moving first.  The users moves will be reflected on both the players browsers. Additionally the users can send chat messages ( trash talk ? ) to each other.  When there is a winner,  both players will be notified.  Idealy this version will be deployable to the web ( like Heroku and other JEE hosting sites on the web ).
 
 The local version will have a color-blind-mode that will allow color-blind users to use/play this Kamisado game.
 
@@ -50,20 +47,22 @@ The local version will have a color-blind-mode that will allow color-blind users
 
 The client for this project would be a PC game distribution service like Steam, EA Origin, or Uplay. The client would sell the game over their distribution service and take a percentage of the profits. 
 
-The users of this software are the people who want to play Kamisado either with a friend or against a computer opponent. They would buy the game from the distributor and play it on their computers.
+The users of this software are the people who want to play Kamisado either with a friend or against a computer opponent. They would buy the game from the distributor and play it on their computers. Users would also have access to the web version.
 
 
 ### 1.3.	Search Words 
 
-Kamisado, Chess, Board, Game, Two-Player, Computer Opponent
+Kamisado, Chess, Board, Game, Two-Player, Computer Opponent, Colorblind
 
 
-###1.4.	Scope and Objectives [critical section]
-Graphics will need to be created for the board and the pieces. Additionally, graphics will be created for the purposes of highlighting valid board spaces and highlighting which opponent's piece will move if a certain space is landed on.
+###1.4.	Scope and Objectives 
+Graphics will need to be created for the board and the pieces. Additionally, graphics will be created for the purposes of highlighting valid board spaces and for colorblind use.
 
-The pieces will be able to be moved with the mouse, and will snap to the center of each board space. This way, pieces will appear aligned and centered. Only the active piece will be able to move, and the game will display an overlay of highlighted game spaces, indicating the spaces that are legal for the active piece to move onto. If a player finishes a move and the opponent's active piece is blocked, leaving it with no valid moves, the player will get an additional turn, moving the piece with the color of the blocked piece's color. 
+There will be a Main Menu from which the user can start a one or two-player game, or play a two-player game with colorblind mode enabled.
 
-The game will detect when the win condition has been met by either player and display a game results message, stating which player won. 
+The starting player will start by clicking on any piece to start with. Only the active piece will be able to move, and the game will display an overlay of highlighted game spaces, indicating the spaces that are legal for the active piece to move onto. If a player finishes a move and the opponent's active piece is blocked, leaving it with no valid moves, the player will get an additional turn, moving the piece with the color of the blocked piece's color. 
+
+The game will detect when the win condition has been met by either player the game will end.
 
 There will be an option for a single player to play against a computer opponent. Since the computer only needs to worry about moving one piece at a time, and doesn't need to decide which piece to move, it will either move the piece that wins the game, or move to a space that doesn't allow its opponent (the player) to win next turn. The computer will determine which of the available spaces is ideal. 
 
@@ -73,21 +72,19 @@ There will be an option for a single player to play against a computer opponent.
 * Chris Dunleavy - proficient in Java, has some experience with JavaScript, HTML, CSS, and SQL
 * Chris Barbee - Some professional experience in Java ( Hibernate, some RESTful web services, some jsp, some UML ( Class Diagram and Sequence Diagrams ). Some javascript ( including JSON, and HTTPRequest ). I enjoy the design phase ( making UML diagrams for instance )
 * Hanyu Chen - Good at using Java and taking CS1C now in Foothill College. Although technically I don't have much experience in Java, but I will try my best to learn and help my team.
+* Swati Gupta - Java, Java GUI
 
 ### 2.1.	Challenges
-[What are the challenges you foresee in successfully completing your project?]
 * Time constraints -- 4 weeks ,  4 sprints.
 * Getting up to speed with Java Swing and J2D(basically is making model of board and game pieces, also need to learn how to drag and drop pieces. 
 * Designing a computer component with AI
-* porting Kamisad model ( in java ) to javscript ( for the web version ).
+* Porting Kamisado model ( in java ) to javscript ( for the web version ).
+* Changing the design of the software as we determine what makes for the most user-friendly experience
+* Making graphics that are pleasing to the eye
+* Making sure all rules are implemented correctly
 
-[Provide a ***description of challenges*** that your group might face. These are often technical and non-technical aspects that may not be apparent to the reader.]
-
-For example, if you were creating a software system for a dental office to manage patients, a challenge may be learning the domain, which involves following HIPPA regulations in disclosure of protected health information.
 
 ### 2.2.	Assumptions and Constraints
-[Under what assumptions and constraints will the team adhere to?]
-[**List any specific assumptions on which the project is based on and imposed constraints** that your team will be working under. Non-technical constraints could be: such as schedule and budget. Technical constraints may be design or implementation metholodogies, tools, operating system(s), hardware or software constraints.
 
 * Non-Technical Constraints:
   * Users have a general understanding of how to user computers ( mouse / keyboard / GUI )
@@ -105,10 +102,6 @@ For example, if you were creating a software system for a dental office to manag
 
 ### 3.1.	Project Deliverables 
 
-[What are the specific delivarables by your team?]
-
-[***Provide a list of deliverables***<sup>[4](#footnote_4)</sup> of any project artifacts.]
-
 Deliverables include:
 *	Software System Project Proposal.
 *	Preliminary design docs ( interfaces )
@@ -121,10 +114,6 @@ Deliverables include:
 *	Javascript code
 *	Other associate files like .png images for board pieces and marking allowable moves.
 *	Short movies demonstrating current functionality ( both fof the Swing GUI version and the web version ).
-*	[This list may include product deployment activities that are necessary for the successful use of the system your team develops.]
-
- *<sup><a name="footnote_4">4</a></sup>Note: This list may be modified over the weeks until the final submission.* 
-
 
 
 ### 3.2.	Schedule and Budget Summary [critical section]
@@ -137,9 +126,6 @@ Deliverables include:
     --  Checking for game winning move
     --  Drag and Drop pieces ( ? )
     --  AI / Look-ahead engine...
-
-[Fill in your teams projected milestones. You will be modifying this over the next few weeks.]
-
 
 ####Milestones
 
