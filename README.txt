@@ -2,9 +2,6 @@ README.txt		Text file containing inforation abouut this project ( CS40A Team04 P
 
 Project2Proposal        Our Project Two Proposal
 
-GameWindowCommented.java 
-			A version of the source file GameWindow.java but with added high-level comments
-
 Board Interface and Implementation ( plus other associated files ):
 
 kamisado.board package:
